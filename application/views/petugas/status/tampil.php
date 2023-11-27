@@ -7,12 +7,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                    <h1>Manajemen Iuran Wajib</h1>
+                                    <h1>Manajemen Status </h1>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">Manajemen Iuran Wajib</li>
+                                        <li class="breadcrumb-item active">Manajemen Status Pengambilan Sampah</li>
                                     </ol>
                                 </div>
                             </div>
@@ -26,10 +26,10 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Data Iuran Wajib</h3>
+                                            <h3 class="card-title">Data Status Pengambilan Sampah</h3>
                                         </div>
                                         <div class="pl-2 pt-3">
-                                        <a href="<?php echo site_url('petugasiuran/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Iuran </b></a>
+                                        <a href="<?php echo site_url('petugasstatus/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Status </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -40,26 +40,24 @@
                                                         <th>Id User</th>
                                                         <th>Id Petugas</th>
                                                         <th>Tanggal</th>
-                                                        <th>Jenis Bayar</th>
-                                                        <th>Status</th>
+                                                        <th>Keterangan</th>
                                                         <th style="width: 230px">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <?php $no = 1;
-                                                        foreach ($iuran as $i) { ?>
+                                                        foreach ($status as $s) { ?>
                                                     <tr>
                                                         <td><?php echo $no; ?></td>
-                                                        <td><?php echo $i->idUser; ?></td>
-                                                        <td><?php echo $i->idPetugas; ?></td>
-                                                        <td><?php echo $i->tanggal; ?></td>
-                                                        <td><?php echo $i->jenisBayar; ?></td>
-                                                        <td><?php echo $i->status; ?></td>
+                                                        <td><?php echo $s->idUser; ?></td>
+                                                        <td><?php echo $s->idPetugas; ?></td>
+                                                        <td><?php echo $s->tanggal; ?></td>
+                                                        <td><?php echo $s->keterangan; ?></td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasiuran/ubah_status/' . $i->idUser); ?>" class="btn btn-warning">Ubah Iuran</a>
-                                                                <a href="<?php echo site_url('petugasiuran/delete/' . $i->idIuran); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
+                                                                <a href="<?php echo site_url('petugasstatus/ubah_status/' . $s->idUser); ?>" class="btn btn-warning">Ubah Status</a>
+                                                                <a href="<?php echo site_url('petugasstatus/delete/' . $s->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
                                                     </tr>

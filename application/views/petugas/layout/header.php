@@ -28,6 +28,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/admin/build/css/custom.min.css'); ?>" rel="stylesheet">
+    
   </head>
 
   <body class="nav-md">

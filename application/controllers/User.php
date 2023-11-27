@@ -10,8 +10,9 @@ class User extends CI_Controller{
     }
 
 	public function index(){
+		$this->load->view('user/layout/header');
 		$this->load->view('user/dashboard');
-	}
+		$this->load->view('user/layout/footer');	}
 
 	public function dashboard(){
 		if(empty($this->session->userdata('userName'))){

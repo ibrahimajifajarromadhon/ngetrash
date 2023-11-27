@@ -29,9 +29,9 @@
                   </li>
                   <li><a href="<?php echo site_url('petugasiuran');?>"><i class="fa fa-edit"></i> Iuran Wajib </a>
                   </li>
-                  <li><a href="<?php echo site_url('status');?>"><i class="fa fa-desktop"></i> Status Pengambilan </a>
+                  <li><a href="<?php echo site_url('petugasstatus');?>"><i class="fa fa-desktop"></i> Status Pengambilan </a>
                   </li>
-                  <li><a href="<?php echo site_url('daur');?>"><i class="fa fa-table"></i> Daur Ulang </a>
+                  <li><a href="<?php echo site_url('petugasdaur');?>"><i class="fa fa-table"></i> Daur Ulang </a>
                   </li>
                 </ul>
               </div>
