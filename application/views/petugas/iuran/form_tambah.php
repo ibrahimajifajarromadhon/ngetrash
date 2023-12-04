@@ -48,7 +48,7 @@
                                                     <label for="idPetugas">Nama Petugas</label>
                                                     <select class="form-control" name="IdPetugas">
                                                     <option selected>None</option>
-                                                    <?php foreach($petugas as $p){?>
+                                                    <?php foreach($petugas1 as $p){?>
                                                             <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name;?></option>
                                                         <?php } ?>
                                                     </select>

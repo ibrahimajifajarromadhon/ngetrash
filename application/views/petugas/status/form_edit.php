@@ -8,7 +8,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manajemen Status</h1>
+                            <h1>Manajemen Status </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -27,87 +27,83 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form edit Status Pengambilan Sampah</h3>
+                                    <h3 class="card-title">Form Edit Status Pengambilan Sampah</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/edit'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/update' . $status->idStatus); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
-                                                    <label for="idUser">Id User</label>
-                                                    <select class="form-control" name="Id user">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
+                                                    <label for="idUser">Nama User</label>
+                                                    <input class="form-control" name="IdUser" value=<?php
+                                                            $user_id = $status->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            ?> disabled>
+                                                    </input>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label for="idPetugas">Id Petugas</label>
-                                                    <select class="form-control" name="Id petugas">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
+                                                    <label for="idPetugas">Nama Petugas</label>
+                                                    <input class="form-control" name="IdUser" value=<?php
+                                                            $petugas_id = $status->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
+                                                            ?> disabled>
+                                                    </input>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" name='tanggal' class="form-control" name="IdUser" value=<?php
+                                                            $user_id = $status->idStatus;
+                                                            $user = $this->db->get_where('tbl_status_pengambilan', array('idStatus' => $user_id))->row();
+                                                            echo $user->tanggal;
+                                                            ?> disabled>
+                                                    </input>
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-th"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label for="jenisBayar">Keterangan</label>
-                                                    <form>
-                                                        <div class="row">
-
-                                                            <div class="col-sm-9">
-                                                                <div class="btn-group">
-                                                                    <label class="btn btn-default active">
-                                                                        <input type="radio" id="q156" name="quality[25]" value="1" checked="checked" /> Sudah diambil
-                                                                    </label>
-                                                                    <label class="btn btn-default">
-                                                                        <input type="radio" id="q157" name="quality[25]" value="2" /> Belum diambil
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                    </form>
+                                                    <label for="keterangan">Keterangan</label>
+                                                    <select class="form-control" name="keterangan">
+                                                        <option selected>None</option>
+                                                        <option value="1">Sudah diambil</option>
+                                                        <option value="2">Belum diambilr</option>
+                                                    </select>
+                                                    <p class="help-block text-danger"></p>
                                                 </div>
-                                                <p class="help-block text-danger"></p>
+
+                                                <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
                                         </div>
-                                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
+                            <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                <ul class="pagination pagination-sm m-0 float-right">
+                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-        </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+                <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 </div>
 </div>
 <!-- /page content -->

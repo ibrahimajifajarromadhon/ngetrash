@@ -36,7 +36,7 @@
                                             <form name="sentMessage" method="post" action="<?php echo site_url('petugasdaur/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <select class="form-control" name="IdUser">
+                                                    <select class="form-control" name="idUser">
                                                     <option selected>None</option>
                                                         <?php foreach($user as $u){?>
                                                             <option value="<?php echo $u->idUser; ?>"><?php echo $u->name;?></option>
@@ -46,9 +46,9 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <select class="form-control" name="IdPetugas">
+                                                    <select class="form-control" name="idPetugas">
                                                     <option selected>None</option>
-                                                    <?php foreach($petugas as $p){?>
+                                                    <?php foreach($petugas1 as $p){?>
                                                             <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name;?></option>
                                                         <?php } ?>
                                                     </select>
@@ -65,10 +65,10 @@
                                                 </div>
                                                 <div class="control-group">
                                                 <label for="barang">Barang</label>
-                                                <select class="form-control" name="idBarang">
+                                                <select class="form-control"  name="idBarang">
                                                         <option selected>None</option>
                                                         <?php foreach($barang as $b){?>
-                                                            <option value="<?php echo $b->idBarang; ?>"><?php echo $b->namaBarang;?></option>
+                                                            <option value="<?php echo $b->idBarang; ?>" data-harga="<?php echo $b->harga; ?>"><?php echo $b->namaBarang;?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
@@ -78,14 +78,9 @@
                                                     <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat"/>
                                                     <p class="help-block text-danger"><?php echo form_error('berat'); ?></p>
                                                 </div>   
-                                                <div class="control-group">
-                                                    <label for="total">Total</label>
-                                                    <select class="form-control" name="total">
-                                                        <option selected>None</option>
-                                                        <?php foreach($total as $t){?>
-                                                            <option value="<?php echo $t->idBarang; ?>"><?php echo $t->harga;?></option>
-                                                        <?php } ?>
-                                                    </select>
+                                                <div class="control-group" name="total">
+                                                    <label for="total">Total: </label>
+                                                    <b><span id="total"></span></b>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
 
@@ -118,3 +113,23 @@
 </div>
 </div>
 <!-- /page content -->
+<script>
+    // Fungsi untuk menghitung total
+    function hitungTotal() {
+        // Ambil nilai berat dari input
+        var berat = parseFloat(document.getElementById('berat').value);
+
+        // Ambil nilai harga dari option yang dipilih
+        var harga = document.querySelector('select[name="idBarang"] option:checked').getAttribute('data-harga');
+        
+        // Hitung total
+        var total = berat * harga;
+
+        // Tampilkan total pada elemen dengan id totalResult
+        document.getElementById('total').innerText = 'Rp. ' + total;
+    }
+
+    // Panggil fungsi hitungTotal saat nilai berat atau ID barang berubah
+    document.getElementById('berat').addEventListener('input', hitungTotal);
+    document.querySelector('select[name="idBarang"]').addEventListener('change', hitungTotal);
+</script>

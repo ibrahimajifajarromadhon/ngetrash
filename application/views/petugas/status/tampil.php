@@ -45,19 +45,31 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                <tr>
                                                         <?php $no = 1;
-                                                        foreach ($status as $s) { ?>
+                                                        foreach ($status as $i) { ?>
                                                     <tr>
                                                         <td><?php echo $no; ?></td>
-                                                        <td><?php echo $s->idUser; ?></td>
-                                                        <td><?php echo $s->idPetugas; ?></td>
-                                                        <td><?php echo $s->tanggal; ?></td>
-                                                        <td><?php echo $s->keterangan; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            $user_id = $i->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            $petugas_id = $i->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $i->tanggal; ?></td>
+                                                        <td><b style="background-color: <?php echo ($i->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->keterangan; ?></b></td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasstatus/edit'); ?>" class="btn btn-warning">Ubah Status</a>
-                                                                <a href="<?php echo site_url('petugasstatus/delete/' . $s->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
+                                                                <a href="<?php echo site_url('petugasstatus/get_by_id/' . $i->idStatus); ?>" class="btn btn-warning">Ubah Status</a>
+                                                                <a href="<?php echo site_url('petugasstatus/delete/' . $i->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
                                                     </tr>

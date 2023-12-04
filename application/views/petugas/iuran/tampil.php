@@ -29,7 +29,7 @@
                                             <h3 class="card-title">Data Iuran Wajib</h3>
                                         </div>
                                         <div class="pl-2 pt-3">
-                                        <a href="<?php echo site_url('petugasiuran/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Iuran </b></a>
+                                            <a href="<?php echo site_url('petugasiuran/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Iuran </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -37,11 +37,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10px">No</th>
-                                                        <th>Id User</th>
-                                                        <th>Id Petugas</th>
+                                                        <th>Nama User</th>
                                                         <th>Tanggal</th>
                                                         <th>Jenis Bayar</th>
                                                         <th>Status</th>
+                                                        <th>Nama Petugas</th>
                                                         <th style="width: 230px">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -51,14 +51,26 @@
                                                         foreach ($iuran as $i) { ?>
                                                     <tr>
                                                         <td><?php echo $no; ?></td>
-                                                        <td><?php echo $i->idUser; ?></td>
-                                                        <td><?php echo $i->idPetugas; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            $user_id = $i->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            ?>
+                                                        </td>
                                                         <td><?php echo $i->tanggal; ?></td>
-                                                        <td><?php echo $i->jenisBayar; ?></td>
-                                                        <td><?php echo $i->status; ?></td>
+                                                        <td><b style="background-color: <?php echo ($i->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->jenisBayar; ?></b></td>
+                                                        <td><b style="background-color: <?php echo ($i->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->status; ?></b></td>
+                                                        <td>
+                                                            <?php
+                                                            $petugas_id = $i->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
+                                                            ?>
+                                                        </td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasiuran/get_by_id/'.$i->idIuran); ?>" class="btn btn-warning">Ubah Iuran</a>
+                                                                <a href="<?php echo site_url('petugasiuran/get_by_id/' . $i->idIuran); ?>" class="btn btn-warning">Ubah Iuran</a>
                                                                 <a href="<?php echo site_url('petugasiuran/delete/' . $i->idIuran); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
@@ -68,7 +80,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <!-- /.card-body -->
                                         <div class="card-footer clearfix">
                                             <ul class="pagination pagination-sm m-0 float-right">

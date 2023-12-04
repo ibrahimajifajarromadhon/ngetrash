@@ -9,41 +9,46 @@ class PetugasDaur extends CI_Controller{
     }
 
     public function index(){
-        if(empty($this->session->userdata('userName'))){
-            redirect('petugas');
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugas/login');
         }
         $data['daur']=$this->Madmin->get_all_data('tbl_daur_ulang')->result();
-        $this->load->view('petugas/layout/header');
-        $this->load->view('petugas/layout/menu');
+        $data['petugas']=$this->Madmin->get_by_id('tbl_petugas', array('idPetugas' => $this->session->userdata('idPetugas')))->row();
+        $this->load->view('petugas/layout/header', $data);
+        $this->load->view('petugas/layout/menu', $data);
         $this->load->view('petugas/daur/tampil', $data);
         $this->load->view('petugas/layout/footer');
     }
 
 	public function add(){
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugasdaur');
+        }
+        $data['petugas']=$this->Madmin->get_by_id('tbl_petugas', array('idPetugas' => $this->session->userdata('idPetugas')))->row();
         $data['user']=$this->Madmin->get_all_data('tbl_user')->result();
-        $data['petugas']=$this->Madmin->get_all_data('tbl_petugas')->result();
+        $data['petugas1']=$this->Madmin->get_all_data('tbl_petugas')->result();
         $data['barang']=$this->Madmin->get_all_data('tbl_barang')->result();
         $data['harga']=$this->Madmin->get_all_data('tbl_barang')->result();
-		$this->load->view('petugas/layout/header');
-        $this->load->view('petugas/layout/menu');
+		$this->load->view('petugas/layout/header', $data);
+        $this->load->view('petugas/layout/menu', $data);
 		$this->load->view('petugas/daur/form_tambah', $data);
 		$this->load->view('petugas/layout/footer');
 	}
 
     public function save(){
-        if(empty($this->session->userdata('userName'))){
-            redirect('petugasstatus');
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugasdaur');
         }
-            $id_u = $this->input->post('IdUser');
-            $id_p = $this->input->post('IdPetugas');
+            $id_u = $this->input->post('idUser');
+            $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
-            $jenisbarang = $this->input->post('jenisBarang');
+            $jenisbarang = $this->input->post('idBarang');
             $berat = $this->input->post('berat');
             $total = $this->input->post('total');
-            $dataInput = array('IdUser' => $id_u,
-                                'IdPetugas' => $id_p,
+            $dataInput = array('idUser' => $id_u,
+                                'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
-                                'jenisBarang' => $jenisbarang,
+                                'idBarang' => $jenisbarang,
                                 'berat' => $berat,
                                 'total' => $total);
             $this->Madmin->insert('tbl_daur_ulang', $dataInput);
@@ -51,17 +56,42 @@ class PetugasDaur extends CI_Controller{
     }
 
     public function get_by_id($id){
-        if(empty($this->session->userdata('userName'))){
+        if(empty($this->session->userdata('Petugas'))){
             redirect('petugasdaur');
         }
-        $dataWhere = array('idIuran' => $id);
-        $data['status']=$this->Madmin->get_by_id('tbl_daur_ulang', $dataWhere)->row_object();
-        $this->load->view('admin/layout/header');
-        $this->load->view('admin/layout/menu');
-        $this->load->view('admin/petugasdaur/form_tambah', $data);
-        $this->load->view('admin/layout/footer');
+        $dataWhere = array('idDaur' => $id);
+        $data['daur']=$this->Madmin->get_by_id('tbl_daur_ulang', $dataWhere)->row_object();
+        $this->load->view('petugas/layout/header', $data);
+        $this->load->view('petugas/layout/menu', $data);
+        $this->load->view('petugas/petugasdaur/form_tambah', $data);
+        $this->load->view('petugas/layout/footer');
     }
+    public function edit(){
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugas/login');
+        }
+            $id = $this->input->post('id');
+            $id_u = $this->input->post('idUser');
+            $id_p = $this->input->post('idPetugas');
+            $tanggal = $this->input->post('tanggal');
+            $jenisbarang = $this->input->post('jenisBarang');
+            $berat = $this->input->post('berat');
+            $dataUpdate = array('idUser' => $id_u,
+                                'idPetugas' => $id_p,
+                                'tanggal' => $tanggal,
+                                'jenisBayar' => $jenisbarang,
+                                'status' => $berat);
+            $this->Madmin->update('tbl_daur_ulang', $dataUpdate, 'idDaur', $id);
+            redirect('petugasdaur');
+	}
 
+    public function delete($id){
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugasdaur');
+        }
+        $this->Madmin->delete('tbl_iuran_wajib', 'idIuran', $id);
+        redirect('petugasdaur');
+    }
 
 
     

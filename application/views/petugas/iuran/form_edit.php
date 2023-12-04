@@ -33,25 +33,41 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/save'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/edit'); ?>">
+                                                <input type="hidden" name="id" value="<?php echo $iuran->idIuran; ?>">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <select class="form-control" name="IdUser">
-                                                            <option selected value="<?php echo $iuran->idUser; ?>"><?php echo $iuran->idUser;?></option>
-                                                    </select>
+                                                    <input type="hidden" name="idUser" value="<?php echo $iuran->idUser; ?>">
+                                                    <input class="form-control" value=<?php
+                                                            $user_id = $iuran->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            $idUser=$user->name;
+                                                            ?> disabled>
+                                                    </input>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <select class="form-control" name="IdPetugas">
-                                                            <option selected value="<?php echo $iuran->idPetugas; ?>"><?php echo $iuran->idPetugas;?></option>
-                                                    </select>
+                                                    <input type="hidden" name="idPetugas" value="<?php echo $iuran->idPetugas; ?>">
+                                                    <input class="form-control" value=<?php
+                                                            $petugas_id = $iuran->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
+                                                            ?> disabled>
+                                                    </input>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
-                                                        <input type="date" class="form-control" name='tanggal'>
+                                                        <input type="hidden" name="tanggal" value="<?php echo $iuran->tanggal; ?>">
+                                                        <input type="date" class="form-control" name="IdUser" value=<?php
+                                                            $user_id = $iuran->idIuran;
+                                                            $user = $this->db->get_where('tbl_iuran_wajib', array('idIuran' => $user_id))->row();
+                                                            echo $user->tanggal;
+                                                            ?> disabled>
+                                                    </input>
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-th"></span>
                                                         </div>
@@ -60,15 +76,15 @@
                                                 <div class="control-group">
                                                     <label for="jenisBayar">Jenis Bayar</label>
                                                     <select class="form-control" name="jenisBayar">
-                                                    <option selected value="<?php echo $iuran->jenisBayar; ?>"><?php echo $iuran->jenisBayar;?></option>
+                                                        <option selected value="1">Tunai</option>
+                                                        <option value="2">Non Tunai</option>   
                                                    </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="status">Status</label>
                                                     <select class="form-control" name="status">
-                                                        <option selected>None</option>
-                                                        <option value="1">Sudah Bayar</option>
+                                                        <option selected value="1">Sudah Bayar</option>
                                                         <option value="2">Belum Bayar</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>

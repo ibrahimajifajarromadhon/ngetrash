@@ -67,8 +67,8 @@
                                                     <label for="status">Keterangan</label>
                                                     <select class="form-control" name="keterangan">
                                                         <option selected>None</option>
-                                                        <option value="1">Belum Bayar</option>
-                                                        <option value="2">Sudah Bayar</option>
+                                                        <option value="1">Belum diambil</option>
+                                                        <option value="2">Sudah diambil</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
