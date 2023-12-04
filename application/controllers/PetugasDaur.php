@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PetugasStatus extends CI_Controller{
+class PetugasDaur extends CI_Controller{
 
     function __construct(){
         parent::__construct();
@@ -12,19 +12,21 @@ class PetugasStatus extends CI_Controller{
         if(empty($this->session->userdata('userName'))){
             redirect('petugas');
         }
-        $data['status']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
+        $data['daur']=$this->Madmin->get_all_data('tbl_daur_ulang')->result();
         $this->load->view('petugas/layout/header');
         $this->load->view('petugas/layout/menu');
-        $this->load->view('petugas/status/tampil', $data);
+        $this->load->view('petugas/daur/tampil', $data);
         $this->load->view('petugas/layout/footer');
     }
 
 	public function add(){
         $data['user']=$this->Madmin->get_all_data('tbl_user')->result();
         $data['petugas']=$this->Madmin->get_all_data('tbl_petugas')->result();
+        $data['barang']=$this->Madmin->get_all_data('tbl_barang')->result();
+        $data['harga']=$this->Madmin->get_all_data('tbl_barang')->result();
 		$this->load->view('petugas/layout/header');
         $this->load->view('petugas/layout/menu');
-		$this->load->view('petugas/status/form_tambah', $data);
+		$this->load->view('petugas/daur/form_tambah', $data);
 		$this->load->view('petugas/layout/footer');
 	}
 
@@ -35,24 +37,28 @@ class PetugasStatus extends CI_Controller{
             $id_u = $this->input->post('IdUser');
             $id_p = $this->input->post('IdPetugas');
             $tanggal = $this->input->post('tanggal');
-            $keterangan = $this->input->post('keterangan');
+            $jenisbarang = $this->input->post('jenisBarang');
+            $berat = $this->input->post('berat');
+            $total = $this->input->post('total');
             $dataInput = array('IdUser' => $id_u,
                                 'IdPetugas' => $id_p,
                                 'tanggal' => $tanggal,
-                                'keterangan' => $keterangan);
-            $this->Madmin->insert('tbl_status_pengambilan', $dataInput);
-            redirect('petugasstatus');
+                                'jenisBarang' => $jenisbarang,
+                                'berat' => $berat,
+                                'total' => $total);
+            $this->Madmin->insert('tbl_daur_ulang', $dataInput);
+            redirect('petugasdaur');
     }
 
     public function get_by_id($id){
         if(empty($this->session->userdata('userName'))){
-            redirect('petugasstatus');
+            redirect('petugasdaur');
         }
         $dataWhere = array('idIuran' => $id);
-        $data['status']=$this->Madmin->get_by_id('tbl_status_pengambilan', $dataWhere)->row_object();
+        $data['status']=$this->Madmin->get_by_id('tbl_daur_ulang', $dataWhere)->row_object();
         $this->load->view('admin/layout/header');
         $this->load->view('admin/layout/menu');
-        $this->load->view('admin/petugasstatus/form_tambah', $data);
+        $this->load->view('admin/petugasdaur/form_tambah', $data);
         $this->load->view('admin/layout/footer');
     }
 

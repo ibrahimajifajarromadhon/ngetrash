@@ -10,47 +10,37 @@ class User extends CI_Controller{
     }
 
 	public function index(){
-		$this->load->view('user/layout/header');
+		$data['user'] = $this->Madmin->get_by_id('tbl_user', array('idUser' => $this->session->userdata('idUser')))->row();
+		$this->load->view('user/layout/header', $data);
 		$this->load->view('user/dashboard');
-		$this->load->view('user/layout/footer');	}
-
-	public function dashboard(){
-		if(empty($this->session->userdata('userName'))){
-			redirect('admin');
-		}
-		$this->load->view('admin/layout/header');
-		$this->load->view('admin/layout/menu');
-		$this->load->view('admin/dashboard');
-		$this->load->view('admin/layout/footer');
+		$this->load->view('user/layout/footer');	
 	}
 
 	public function login(){
-		//Membuat aturan dari form validasi
-		$this->form_validation->set_rules('userName', 'Username', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-        $this->form_validation->set_rules('password', 'Password', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Password Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-		
-		if ($this->form_validation->run() == FALSE) {
-            // Jika validasi gagal, tampilkan form login dengan pesan error
-            $this->load->view('admin/login');
-        } else{
-			$u = $this->input->post('userName');
-			$p = $this->input->post('password');
-			$cek = $this->Madmin->cek_login($u, $p);
-				if ($cek==1) {
-					// Jika login berhasil, set session dan redirect ke halaman dashboard admin
-					$data_session = array(
-								'userName' => $u,
-								'status' => 'login'
-							);
-							$this->session->set_userdata($data_session);
-							redirect('admin/dashboard');
-				} else {
-					// Jika login gagal, tampilkan form login dengan pesan error
-					$data['error_message'] = '<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Atau Password Anda Salah! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
-					$this->load->view('admin/login', $data);
-				}
+        $this->load->view('user/login');
+    }
+
+	public function login_aksi(){
+		$this->load->model('Madmin');
+
+		$u = $this->input->post('userName');
+		$p = $this->input->post('password');
+
+		$cek = $this->Madmin->cek_login_user($u, $p);
+
+		if ($cek['loggedIn']) {
+			$data_session = array(
+				'idUser' => $cek['idUser'],
+				'User' => $u,
+				'status' => 'login'
+			);
+
+			$this->session->set_userdata($data_session);
+			redirect('user');
+		} else {
+			redirect('user');
 		}
-	}
+}
 
 	public function register(){
 		//Membuat aturan dari form validasi
@@ -59,30 +49,40 @@ class User extends CI_Controller{
 		
 		if ($this->form_validation->run() == FALSE) {
             // Jika validasi gagal, tampilkan form login dengan pesan error
-            $this->load->view('admin/register');
+            $this->load->view('user/register');
         } else{
 			$n = $this->input->post('name');
 			$u = $this->input->post('userName');
             $p = $this->input->post('password');
+			$a = $this->input->post('alamat');
+			$sm = $this->input->post('saldoMasuk');
+			$sk = $this->input->post('saldoKeluar');
+			$ts = $this->input->post('totalSaldo');
+			$statusAktif = $this->input->post('statusAktif');
             
             // Encrypt password 
             $hashed_password = password_hash($p, PASSWORD_DEFAULT);
 			// Save member
-            $admin_data = array(
+            $user_data = array(
 				'name' => $n,
                 'userName' => $u,
-                'password' => $hashed_password
-            );
+                'password' => $hashed_password,
+				'alamat' => $a,
+				'saldoMasuk' => $sm,
+				'saldoKeluar' => $sk,
+				'totalSaldo' => $ts,
+				'statusAktif' => $statusAktif
+			);
             
-            $this->Madmin->save_admin($admin_data);
+            $this->Madmin->save_user($user_data);
             
-            redirect('admin/dashboard');
+            redirect('user');
 		}
 	}
 
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('admin');
+		redirect('user');
 	}
 }
 

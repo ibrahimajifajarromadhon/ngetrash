@@ -35,29 +35,29 @@
                                         <div class="contact-form">
                                             <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
-                                                    <label for="idUser">Id User</label>
-                                                    <select class="form-control" name="kategori">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <label for="idUser">Nama User</label>
+                                                    <select class="form-control" name="IdUser">
+                                                    <option selected>None</option>
+                                                        <?php foreach($user as $u){?>
+                                                            <option value="<?php echo $u->idUser; ?>"><?php echo $u->name;?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label for="idPetugas">Id Petugas</label>
-                                                    <select class="form-control" name="kategori">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <label for="idPetugas">Nama Petugas</label>
+                                                    <select class="form-control" name="IdPetugas">
+                                                    <option selected>None</option>
+                                                    <?php foreach($petugas as $p){?>
+                                                            <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name;?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" class="form-control" name='tanggal'>
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-th"></span>
                                                         </div>
@@ -65,21 +65,19 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="jenisBayar">Jenis Bayar</label>
-                                                    <select class="form-control" name="kategori">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <select class="form-control" name="jenisBayar">
+                                                        <option selected>None</option>
+                                                        <option value="1">Tunai</option>
+                                                        <option value="2">Non Tunai</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="status">Status</label>
-                                                    <select class="form-control" name="kategori">
-                                                        <option selected>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                    <select class="form-control" name="status">
+                                                        <option selected>None</option>
+                                                        <option value="1">Sudah Bayar</option>
+                                                        <option value="2">Belum Bayar</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>

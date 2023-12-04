@@ -10,44 +10,39 @@ class Admin extends CI_Controller{
     }
 
 	public function index(){
-		$this->load->view('admin/login');
-	}
-
-	public function dashboard(){
-		if(empty($this->session->userdata('userName'))){
-			redirect('admin');
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
 		}
-		$this->load->view('admin/layout/header');
-		$this->load->view('admin/layout/menu');
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
 		$this->load->view('admin/dashboard');
-		$this->load->view('admin/layout/footer');
+		$this->load->view('admin/layout/footer');	
 	}
 
 	public function login(){
-		//Membuat aturan dari form validasi
-		$this->form_validation->set_rules('userName', 'Username', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-        $this->form_validation->set_rules('password', 'Password', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Password Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-		
-		if ($this->form_validation->run() == FALSE) {
-            // Jika validasi gagal, tampilkan form login dengan pesan error
-            $this->load->view('admin/login');
-        } else{
-			$u = $this->input->post('userName');
-			$p = $this->input->post('password');
-			$cek = $this->Madmin->cek_login($u, $p);
-				if ($cek==1) {
-					// Jika login berhasil, set session dan redirect ke halaman dashboard admin
-					$data_session = array(
-								'userName' => $u,
-								'status' => 'login'
-							);
-							$this->session->set_userdata($data_session);
-							redirect('admin/dashboard');
-				} else {
-					// Jika login gagal, tampilkan form login dengan pesan error
-					$data['error_message'] = '<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Atau Password Anda Salah! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
-					$this->load->view('admin/login', $data);
-				}
+		$this->load->view('admin/login');
+	}
+
+	public function login_aksi(){
+		$this->load->model('Madmin');
+
+		$u = $this->input->post('userName');
+		$p = $this->input->post('password');
+
+		$cek = $this->Madmin->cek_login_admin($u, $p);
+
+		if ($cek['loggedIn']) {
+			$data_session = array(
+				'idAdmin' => $cek['idAdmin'],
+				'Admin' => $u,
+				'status' => 'login'
+			);
+
+			$this->session->set_userdata($data_session);
+			redirect('admin');
+		} else {
+			redirect('admin');
 		}
 	}
 
@@ -75,13 +70,13 @@ class Admin extends CI_Controller{
             
             $this->Madmin->save_admin($admin_data);
             
-            redirect('admin/dashboard');
+            redirect('admin');
 		}
 	}
 
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('admin');
+		redirect('admin/login');
 	}
 }
 

@@ -1,19 +1,14 @@
         <!-- page content -->
-        <div class="right_col" role="main">
-            <div class="container">
+        <section id="status">
+            <div id="status" class="container py-5 my-5">
+
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <div class="container-fluid">
                             <div class="row mb-2">
-                                <div class="col-sm-6">
-                                    <h1>Manajemen Status </h1>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ol class="breadcrumb float-sm-right">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">Manajemen Status Pengambilan Sampah</li>
-                                    </ol>
+                                <div class="col-sm-12">
+                                    <h1>Status Pengambilan Sampah </h1>
                                 </div>
                             </div>
                         </div><!-- /.container-fluid -->
@@ -28,47 +23,50 @@
                                         <div class="card-header">
                                             <h3 class="card-title">Data Status Pengambilan Sampah</h3>
                                         </div>
-                                        <div class="pl-2 pt-3">
-                                        <a href="<?php echo site_url('petugasstatus/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Status </b></a>
-                                        </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10px">No</th>
-                                                        <th>Id User</th>
-                                                        <th>Id Petugas</th>
+                                                        <th>Nama User</th>
                                                         <th>Tanggal</th>
+                                                        <th>Nama Petugas</th>
                                                         <th>Keterangan</th>
-                                                        <th style="width: 230px">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <?php $no = 1;
-                                                        foreach ($status as $s) { ?>
-                                                    <tr>
-                                                        <td><?php echo $no; ?></td>
-                                                        <td><?php echo $s->idUser; ?></td>
-                                                        <td><?php echo $s->idPetugas; ?></td>
-                                                        <td><?php echo $s->tanggal; ?></td>
-                                                        <td><?php echo $s->keterangan; ?></td>
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasstatus/edit'); ?>" class="btn btn-warning">Ubah Status</a>
-                                                                <a href="<?php echo site_url('petugasstatus/delete/' . $s->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php $no++;
-                                                        } ?>
+                                                    <?php
+                                                    $no = 1;
+                                                    $user_id = $_SESSION['idUser'];
+                                                    $loggedInUser = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                    foreach ($status as $s) {
+                                                        if ($s->idUser == $loggedInUser->idUser) { 
+                                                    ?>
+                                                            <tr>
+                                                                <td><?php echo $no; ?></td>
+                                                                <td><?php echo $loggedInUser->name; ?></td>
+                                                                <td><?php echo $s->tanggal; ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    $petugas_id = $s->idPetugas;
+                                                                    $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                                    echo $petugas->name;
+                                                                    ?>
+                                                                </td>
+                                                                <td style="color: <?php echo ($s->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>;"><b><?php echo $s->keterangan; ?></b></td>
+                                                            </tr>
+                                                    <?php
+                                                            $no++;
+                                                        }
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <!-- /.card-body -->
-                                        <div class="card-footer clearfix">
+                                        <!-- <div class="card-footer clearfix">
                                             <ul class="pagination pagination-sm m-0 float-right">
                                                 <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -76,7 +74,7 @@
                                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -87,5 +85,6 @@
                 </div>
                 <!-- /.content-wrapper -->
             </div>
-        </div>
+            </div>
+        </section>
         <!-- /page content -->
