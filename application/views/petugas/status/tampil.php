@@ -37,10 +37,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10px">No</th>
-                                                        <th>Id User</th>
-                                                        <th>Id Petugas</th>
+                                                        <th>Nama User</th>
                                                         <th>Tanggal</th>
                                                         <th>Keterangan</th>
+                                                        <th>Nama Petugas</th>
                                                         <th style="width: 230px">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -57,6 +57,8 @@
                                                             echo $user->name;
                                                             ?>
                                                         </td>
+                                                        <td><?php echo $i->tanggal; ?></td>
+                                                        <td><b style="background-color: <?php echo ($i->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->keterangan; ?></b></td>
                                                         <td>
                                                             <?php
                                                             $petugas_id = $i->idPetugas;
@@ -64,8 +66,6 @@
                                                             echo $petugas->name;
                                                             ?>
                                                         </td>
-                                                        <td><?php echo $i->tanggal; ?></td>
-                                                        <td><b style="background-color: <?php echo ($i->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->keterangan; ?></b></td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="<?php echo site_url('petugasstatus/get_by_id/' . $i->idStatus); ?>" class="btn btn-warning">Ubah Status</a>

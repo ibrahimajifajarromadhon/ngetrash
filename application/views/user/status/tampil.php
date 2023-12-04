@@ -31,8 +31,8 @@
                                                         <th style="width: 10px">No</th>
                                                         <th>Nama User</th>
                                                         <th>Tanggal</th>
-                                                        <th>Nama Petugas</th>
                                                         <th>Keterangan</th>
+                                                        <th>Nama Petugas</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

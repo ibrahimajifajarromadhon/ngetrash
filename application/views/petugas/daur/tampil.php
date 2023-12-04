@@ -37,12 +37,12 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10px">No</th>
-                                                        <th>Id User</th>
-                                                        <th>Id Petugas</th>
+                                                        <th>Nama User</th>
                                                         <th>Tanggal</th>
                                                         <th>Jenis Barang</th>
                                                         <th>Berat</th>
                                                         <th>Total</th>
+                                                        <th>Nama Petugas</th>
                                                         <th style="width: 230px">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -59,13 +59,6 @@
                                                                 echo $user->name;
                                                             ?>    
                                                         </td>
-                                                        <td>
-                                                            <?php 
-                                                                $petugas_id = $d->idPetugas;
-                                                                $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
-                                                                echo $petugas->name;
-                                                            ?>
-                                                        </td>
                                                         <td><?php echo $d->tanggal; ?></td>
                                                         <td>
                                                             <?php
@@ -77,8 +70,15 @@
                                                         <td><?php echo $d->berat; ?>kg</td>
                                                         <td>Rp.<?php echo $d->total; ?></td>
                                                         <td>
+                                                            <?php 
+                                                                $petugas_id = $d->idPetugas;
+                                                                $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                                echo $petugas->name;
+                                                            ?>
+                                                        </td>
+                                                        <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasdaur/ubah_status/' . $d->idUser); ?>" class="btn btn-warning">Ubah Iuran</a>
+                                                                <a href="<?php echo site_url('petugasdaur/get_by_id/' . $d->idDaur); ?>" class="btn btn-warning">Ubah Iuran</a>
                                                                 <a href="<?php echo site_url('petugasdaur/delete/' . $d->idDaur); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>

@@ -34,10 +34,10 @@
   <div class="container">
     <div class="row">
     <h1 class="mb-5 w-60">JADWAL PENGAMBILAN SAMPAH</h1>
-      <div class="col-md-8">
+      <div class="col-md-9">
       <div id='calendar'></div>
       </div>
-      <div class="col-md-4">TRUK SAMPAH/GAMBAR SAMPAH</div>
+      <div class="col-md-3">TRUK SAMPAH/GAMBAR SAMPAH</div>
     </div>
   </div>
   </section>

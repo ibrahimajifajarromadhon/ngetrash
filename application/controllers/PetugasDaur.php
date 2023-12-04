@@ -39,7 +39,6 @@ class PetugasDaur extends CI_Controller{
         if(empty($this->session->userdata('Petugas'))){
             redirect('petugasdaur');
         }
-        
             $id_u = $this->input->post('idUser');
             $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
@@ -53,8 +52,7 @@ class PetugasDaur extends CI_Controller{
                                 'berat' => $berat,
                                 'total' => $total);
             $this->Madmin->insert('tbl_daur_ulang', $dataInput);
-            $idUser = $this->session->userdata('idUser'); // Ganti sesuai dengan nama kolom yang menyimpan ID pengguna
-            $this->Madmin->updateTotalSaldoUser($idUser);
+            $this->Madmin->tambahSaldoMasuk($id_u, $total);
             redirect('petugasdaur');
     }
 
@@ -62,11 +60,14 @@ class PetugasDaur extends CI_Controller{
         if(empty($this->session->userdata('Petugas'))){
             redirect('petugasdaur');
         }
+        $data['petugas']=$this->Madmin->get_by_id('tbl_petugas', array('idPetugas' => $this->session->userdata('idPetugas')))->row();
         $dataWhere = array('idDaur' => $id);
         $data['daur']=$this->Madmin->get_by_id('tbl_daur_ulang', $dataWhere)->row_object();
+        $data['barang']=$this->Madmin->get_all_data('tbl_barang')->result();
+        $data['harga']=$this->Madmin->get_all_data('tbl_barang')->result();
         $this->load->view('petugas/layout/header', $data);
         $this->load->view('petugas/layout/menu', $data);
-        $this->load->view('petugas/petugasdaur/form_tambah', $data);
+        $this->load->view('petugas/daur/form_edit', $data);
         $this->load->view('petugas/layout/footer');
     }
     public function edit(){
@@ -77,20 +78,25 @@ class PetugasDaur extends CI_Controller{
             $id_u = $this->input->post('idUser');
             $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
-            $jenisbarang = $this->input->post('jenisBarang');
+            $jenisbarang = $this->input->post('idBarang');
             $berat = $this->input->post('berat');
+
+            $total = $this->input->post('totalResult');
+
             $dataUpdate = array('idUser' => $id_u,
                                 'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
-                                'jenisBayar' => $jenisbarang,
-                                'status' => $berat);
+                                'idBarang' => $jenisbarang,
+                                'berat' => $berat,
+                                'total' => $total);
             $this->Madmin->update('tbl_daur_ulang', $dataUpdate, 'idDaur', $id);
+            $this->Madmin->tambahSaldoMasuk($id_u, $total);
             redirect('petugasdaur');
 	}
 
     public function delete($id){
         if(empty($this->session->userdata('Petugas'))){
-            redirect('petugasiuran');
+            redirect('petugasdaur');
         }
         $this->Madmin->delete('tbl_daur_ulang', 'idDaur', $id);
         redirect('petugasdaur');

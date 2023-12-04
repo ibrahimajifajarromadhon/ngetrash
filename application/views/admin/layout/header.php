@@ -47,7 +47,6 @@
                     <img src="<?php echo base_url('assets/admin/production/images/user.png'); ?>" alt=""><?php echo $admin->name; ?>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item"  href="javascript:;"> Profile</a>
                     <a href="<?php echo site_url('admin/logout');?>" class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>

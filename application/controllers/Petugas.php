@@ -47,12 +47,10 @@ class Petugas extends CI_Controller{
 	}
 
 	public function register(){
-		//Membuat aturan dari form validasi
 		$this->form_validation->set_rules('userName', 'Username', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
         $this->form_validation->set_rules('password', 'Password', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Password Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
 		
 		if ($this->form_validation->run() == FALSE) {
-            // Jika validasi gagal, tampilkan form login dengan pesan error
             $this->load->view('petugas/register');
         } else{
 			$n = $this->input->post('name');
@@ -60,9 +58,7 @@ class Petugas extends CI_Controller{
             $p = $this->input->post('password');
 			$statusAktif = $this->input->post('statusAktif');
             
-            // Encrypt password 
             $hashed_password = password_hash($p, PASSWORD_DEFAULT);
-			// Save member
             $petugas_data = array(
 				'name' => $n,
                 'userName' => $u,

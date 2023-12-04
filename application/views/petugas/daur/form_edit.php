@@ -8,12 +8,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manajemen Iuran Wajib</h1>
+                            <h1>Manajemen Daur Ulang</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manajemen Iuran Wajib</li>
+                                <li class="breadcrumb-item active">Manajemen Daur Ulang</li>
                             </ol>
                         </div>
                     </div>
@@ -27,19 +27,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Edit Iuran Wajib</h3>
+                                    <h3 class="card-title">Form Tambah Daur Ulang</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/edit'); ?>">
-                                                <input type="hidden" name="id" value="<?php echo $iuran->idIuran; ?>">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasdaur/edit'); ?>" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" value="<?php echo $daur->idDaur; ?>">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <input type="hidden" name="idUser" value="<?php echo $iuran->idUser; ?>">
+                                                    <input type="hidden" name="idUser" value="<?php echo $daur->idUser; ?>">
                                                     <input class="form-control" value=<?php
-                                                            $user_id = $iuran->idUser;
+                                                            $user_id = $daur->idUser;
                                                             $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
                                                             echo $user->name;
                                                             $idUser=$user->name;
@@ -49,9 +49,9 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <input type="hidden" name="idPetugas" value="<?php echo $iuran->idPetugas; ?>">
+                                                    <input type="hidden" name="idPetugas" value="<?php echo $daur->idPetugas; ?>">
                                                     <input class="form-control" value=<?php
-                                                            $petugas_id = $iuran->idPetugas;
+                                                            $petugas_id = $daur->idPetugas;
                                                             $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
                                                             echo $petugas->name;
                                                             ?> disabled>
@@ -61,38 +61,34 @@
                                                 <div class="control-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
-                                                        <input type="hidden" name="tanggal" value="<?php echo $iuran->tanggal; ?>">
-                                                        <input type="date" class="form-control" name="tanggal" value=<?php
-                                                            $user_id = $iuran->idIuran;
-                                                            $user = $this->db->get_where('tbl_iuran_wajib', array('idIuran' => $user_id))->row();
-                                                            echo $user->tanggal;
+                                                        <input type="hidden" name="tanggal" value="<?php echo $daur->tanggal; ?>">
+                                                        <input type="date" class="form-control" name="idDaur" value=<?php
+                                                            $daur_id = $daur->idDaur;
+                                                            $daur = $this->db->get_where('tbl_daur_ulang', array('idDaur' => $daur_id))->row();
+                                                            echo $daur->tanggal;
                                                             ?> disabled>
                                                         </input>
-                                                        <div class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-th"></span>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label for="jenisBayar">Jenis Bayar</label>
-                                                    <select class="form-control" name="jenisBayar">
-                                                        <option selected value="1">Tunai</option>
-                                                        <option value="2">Non Tunai</option>   
-                                                   </select>
-                                                    <p class="help-block text-danger"></p>
-                                                </div>
-                                                <div class="control-group" id="nominalInput" style="display: none;">
-                                                    <label for="nominal">Nominal</label>
-                                                    <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Masukkan Nominal">
-                                                    <p class="help-block text-danger"></p>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label for="status">Status</label>
-                                                    <select class="form-control" name="status">
-                                                        <option selected value="1">Sudah Bayar</option>
-                                                        <option value="2">Belum Bayar</option>
+                                                <label for="barang">Barang</label>
+                                                    <select class="form-control" name="idBarang">
+                                                        <?php foreach($barang as $b){?>
+                                                            <option selected value="<?php echo $b->idBarang; ?>" data-harga="<?php echo $b->harga; ?>"><?php echo $b->namaBarang;?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
+                                                </div> 
+                                                <div class="control-group">
+                                                    <label for="berat">Berat</label>
+                                                    <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat"/>
+                                                    <p class="help-block text-danger"><?php echo form_error('berat'); ?></p>
+                                                </div>   
+                                                <div class="control-group" name="total">
+                                                    <label for="total">Total: </label>
+                                                    <b><span id="total"></span></b>
+                                                    <p class="help-block text-danger"></p>
+                                                    <input type="hidden" name="totalResult" id="totalResult">
                                                 </div>
 
                                                 <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
@@ -125,16 +121,17 @@
 </div>
 <!-- /page content -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var jenisBayarSelect = document.querySelector('select[name="jenisBayar"]');
-        var nominalInput = document.getElementById('nominalInput');
+    function hitungTotal() {
+        var berat = parseFloat(document.getElementById('berat').value);
 
-        jenisBayarSelect.addEventListener('change', function () {
-            if (jenisBayarSelect.value === '2') { 
-                nominalInput.style.display = 'block'; 
-            } else {
-                nominalInput.style.display = 'none'; 
-            }
-        });
-    });
+        var harga = document.querySelector('select[name="idBarang"] option:checked').getAttribute('data-harga');
+        
+        var total = berat * harga;
+
+        document.getElementById('total').innerText = 'Rp. ' + total;
+        document.getElementById('totalResult').value = total;
+    }
+
+    document.getElementById('berat').addEventListener('input', hitungTotal);
+    document.querySelector('select[name="idBarang"]').addEventListener('change', hitungTotal);
 </script>

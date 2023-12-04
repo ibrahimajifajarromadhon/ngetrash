@@ -48,7 +48,7 @@
                                                         <td><?php echo $no; ?></td>
                                                         <td><?php echo $p->name; ?></td>
                                                         <td><?php echo $p->userName; ?></td>
-                                                        <td style="color: <?php echo ($p->statusAktif == 'Y') ? 'green' : 'red'; ?>;"><b><?php if ($p->statusAktif == "Y") {
+                                                        <td><b style="background-color: <?php echo ($p->statusAktif == 'Y') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php if ($p->statusAktif == "Y") {
                                                                 echo "Aktif";
                                                             } else {
                                                                 echo "Tidak Aktif";

@@ -36,7 +36,7 @@
                                             <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <select class="form-control" name="IdUser">
+                                                    <select class="form-control" name="idUser">
                                                         <option selected>None</option>
                                                         <?php foreach ($user as $u) { ?>
                                                             <option value="<?php echo $u->idUser; ?>"><?php echo $u->name; ?></option>
@@ -46,7 +46,7 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <select class="form-control" name="IdPetugas">
+                                                    <select class="form-control" name="idPetugas">
                                                         <option selected>None</option>
                                                         <?php foreach ($petugas1 as $p) { ?>
                                                             <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name; ?></option>
@@ -117,16 +117,15 @@
 </div>
 <!-- /page content -->
 <script>
-    // JavaScript untuk menangani perubahan pada pilihan 'Jenis Bayar'
     document.addEventListener("DOMContentLoaded", function () {
         var jenisBayarSelect = document.querySelector('select[name="jenisBayar"]');
         var nominalInput = document.getElementById('nominalInput');
 
         jenisBayarSelect.addEventListener('change', function () {
-            if (jenisBayarSelect.value === '2') { // Jika pilihan adalah 'Non Tunai'
-                nominalInput.style.display = 'block'; // Tampilkan input nominal
+            if (jenisBayarSelect.value === '2') { 
+                nominalInput.style.display = 'block'; 
             } else {
-                nominalInput.style.display = 'none'; // Sembunyikan input nominal
+                nominalInput.style.display = 'none'; 
             }
         });
     });

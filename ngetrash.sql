@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2023 at 04:55 AM
+-- Generation Time: Dec 04, 2023 at 09:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,8 +39,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`idAdmin`, `name`, `userName`, `password`) VALUES
-(7, 'Admin', 'admin', '$2y$10$YCevMzNdlblbzfczKwDOIe15RMaTBJbPTG6MoRNpTO3AjiALDQCQ.'),
-(8, 'ibrahim', 'ibrahim', '$2y$10$qL.mYFRaled86rnXRQvd.O1Tpn4e3gA2Mm0iyRvK2TKny5K.L3WN2');
+(7, 'Admin', 'admin', '$2y$10$YCevMzNdlblbzfczKwDOIe15RMaTBJbPTG6MoRNpTO3AjiALDQCQ.');
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,8 @@ CREATE TABLE `tbl_barang` (
 --
 
 INSERT INTO `tbl_barang` (`idBarang`, `namaBarang`, `harga`) VALUES
-(2, 'Plastik', 10000);
+(2, 'Plastik', 10000),
+(3, 'Kardus', 15000);
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE `tbl_daur_ulang` (
 --
 
 INSERT INTO `tbl_daur_ulang` (`idDaur`, `tanggal`, `berat`, `total`, `idBarang`, `idUser`, `idPetugas`) VALUES
-(2, '2023-11-01', 1, 0, 2, 3, 8);
+(40, '2023-12-05', 5, 50000, 2, 5, 12);
 
 -- --------------------------------------------------------
 
@@ -104,9 +104,7 @@ CREATE TABLE `tbl_iuran_wajib` (
 --
 
 INSERT INTO `tbl_iuran_wajib` (`idIuran`, `tanggal`, `status`, `jenisBayar`, `idUser`, `idPetugas`) VALUES
-(2, '2023-11-01', 'Sudah Bayar', 'Non Tunai', 3, 8),
-(5, '2023-11-01', 'Sudah Bayar', 'Tunai', 3, 6),
-(9, '2023-11-01', 'Sudah Bayar', 'Tunai', 3, 8);
+(38, '2023-12-05', 'Sudah Bayar', 'Non Tunai', 5, 12);
 
 -- --------------------------------------------------------
 
@@ -127,8 +125,30 @@ CREATE TABLE `tbl_petugas` (
 --
 
 INSERT INTO `tbl_petugas` (`idPetugas`, `name`, `userName`, `password`, `statusAktif`) VALUES
-(6, 'ibrahim', 'ibrahim', '$2y$10$fNqgExKyjWlrEUtRvBdXJuH6oSfornb/BPXb2zJHklgPAw.g4rmE6', 'N'),
-(8, 'Admin', 'admin', '$2y$10$LrYZpr2pM4UwtxzOYhQUJe3wbJHL39Ml1308z2b3tgQSTO84liVRa', 'Y');
+(12, 'Petugas', 'petugas@gmail.com', '$2y$10$ldJ2uCaiHJQjT3MmK/GhxObh9vNZaX/RVxLhM1uHI38WdlpPntikC', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_riwayat_transaksi`
+--
+
+CREATE TABLE `tbl_riwayat_transaksi` (
+  `idTransaksi` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `jenis_transaksi` enum('masuk','keluar') NOT NULL,
+  `jumlah` decimal(10,2) NOT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `tanggal_transaksi` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_riwayat_transaksi`
+--
+
+INSERT INTO `tbl_riwayat_transaksi` (`idTransaksi`, `idUser`, `jenis_transaksi`, `jumlah`, `keterangan`, `tanggal_transaksi`) VALUES
+(33, 5, 'masuk', 50000.00, 'Daur ulang', '2023-12-04 20:37:59'),
+(34, 5, 'keluar', 10000.00, 'Pengeluaran Iuran Wajib', '2023-12-04 20:38:43');
 
 -- --------------------------------------------------------
 
@@ -143,16 +163,6 @@ CREATE TABLE `tbl_status_pengambilan` (
   `idUser` int(5) NOT NULL,
   `idPetugas` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_status_pengambilan`
---
-
-INSERT INTO `tbl_status_pengambilan` (`idStatus`, `keterangan`, `tanggal`, `idUser`, `idPetugas`) VALUES
-(2, 'Belum Diambil', '2023-11-01', 3, 8),
-(4, 'Sudah Diambil', '2023-11-01', 4, 6),
-(9, 'Belum Diambil', '2023-11-01', 4, 8),
-(10, 'Sudah Diambil', '2023-11-01', 3, 8);
 
 -- --------------------------------------------------------
 
@@ -177,8 +187,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`idUser`, `name`, `userName`, `password`, `alamat`, `saldoMasuk`, `saldoKeluar`, `totalSaldo`, `statusAktif`) VALUES
-(3, 'admin', 'admin', '$2y$10$YrZqe4ylM5ekDEoTkxvIbuAHRlR5gbcgyV/YUvVlXD2S0qOAKtZxO', 'jogja', 0, 0, 10000, 'Y'),
-(4, 'Ibrahim', 'ibrahim', '$2y$10$9lGNXNAAXm5TD8NF7eUsweRpc9XwgKS75itx9eQ04XZjbDMhK0S/y', 'Klaten', 0, 0, 0, 'N');
+(5, 'User', 'user@gmail.com', '$2y$10$kHqj/sN51w2Njuwj.AYGYuc.SXAEIT8yoSyb.q2EgBjEGtnWz9LJS', 'Jogja', 50000, 10000, 40000, 'Y');
 
 --
 -- Indexes for dumped tables
@@ -220,6 +229,13 @@ ALTER TABLE `tbl_petugas`
   ADD PRIMARY KEY (`idPetugas`);
 
 --
+-- Indexes for table `tbl_riwayat_transaksi`
+--
+ALTER TABLE `tbl_riwayat_transaksi`
+  ADD PRIMARY KEY (`idTransaksi`),
+  ADD KEY `fk_user_id` (`idUser`);
+
+--
 -- Indexes for table `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
@@ -247,37 +263,43 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  MODIFY `idBarang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idBarang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_daur_ulang`
 --
 ALTER TABLE `tbl_daur_ulang`
-  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
-  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_petugas`
 --
 ALTER TABLE `tbl_petugas`
-  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_riwayat_transaksi`
+--
+ALTER TABLE `tbl_riwayat_transaksi`
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
-  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -297,6 +319,12 @@ ALTER TABLE `tbl_daur_ulang`
 ALTER TABLE `tbl_iuran_wajib`
   ADD CONSTRAINT `tbl_iuran_wajib_ibfk_1` FOREIGN KEY (`idPetugas`) REFERENCES `tbl_petugas` (`idPetugas`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `tbl_iuran_wajib_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `tbl_user` (`idUser`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tbl_riwayat_transaksi`
+--
+ALTER TABLE `tbl_riwayat_transaksi`
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`idUser`) REFERENCES `tbl_user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_status_pengambilan`

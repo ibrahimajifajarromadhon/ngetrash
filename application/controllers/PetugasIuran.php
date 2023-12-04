@@ -37,11 +37,12 @@ class PetugasIuran extends CI_Controller{
         if(empty($this->session->userdata('Petugas'))){
             redirect('petugasiuran');
         }
-            $id_u = $this->input->post('IdUser');
-            $id_p = $this->input->post('IdPetugas');
+            $id_u = $this->input->post('idUser');
+            $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
             $jenisbayar = $this->input->post('jenisBayar');
             $status = $this->input->post('status');
+
             $nominal = $this->input->post('nominal');
 
             $dataInput = array('idUser' => $id_u,
@@ -50,9 +51,8 @@ class PetugasIuran extends CI_Controller{
                                 'jenisBayar' => $jenisbayar,
                                 'status' => $status);
             $this->Madmin->insert('tbl_iuran_wajib', $dataInput);
-            if ($jenisbayar == '2') { // Jika jenis bayar adalah 'Non Tunai'
-                // Panggil fungsi pada model untuk mengurangi saldo pengguna
-                $this->Madmin->reduce_user_balance($id_u, $nominal);
+            if ($jenisbayar == '2') { 
+                $this->Madmin->kurangiSaldoKeluar($id_u, $nominal);
             }
             redirect('petugasiuran');
     }
@@ -79,12 +79,18 @@ class PetugasIuran extends CI_Controller{
             $tanggal = $this->input->post('tanggal');
             $jenisbayar = $this->input->post('jenisBayar');
             $status = $this->input->post('status');
+
+            $nominal = $this->input->post('nominal');
+
             $dataUpdate = array('idUser' => $id_u,
                                 'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
                                 'jenisBayar' => $jenisbayar,
                                 'status' => $status);
             $this->Madmin->update('tbl_iuran_wajib', $dataUpdate, 'idIuran', $id);
+            if ($jenisbayar == '2') { 
+                $this->Madmin->kurangiSaldoKeluar($id_u, $nominal);
+            }
             redirect('petugasiuran');
 	}
 

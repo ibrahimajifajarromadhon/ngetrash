@@ -56,7 +56,7 @@
                                                         <td><?php echo $usr->saldoMasuk; ?></td>
                                                         <td><?php echo $usr->saldoKeluar; ?></td>
                                                         <td><?php echo $usr->totalSaldo; ?></td>
-                                                        <td style="color: <?php echo ($usr->statusAktif == 'Y') ? 'green' : 'red'; ?>;"><b><?php if ($usr->statusAktif == "Y") {
+                                                        <td><b style="background-color: <?php echo ($usr->statusAktif == 'Y') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php if ($usr->statusAktif == "Y") {
                                                                 echo "Aktif";
                                                             } else {
                                                                 echo "Tidak Aktif";

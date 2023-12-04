@@ -32,37 +32,52 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         events: [{
-            title: 'Pembayaran 1',
+            title: 'Pembayaran',
             start: '2023-12-03',
             color: '#FF4500'
           },
           {
-            title: 'Pembayaran 2',
-            start: '2023-12-17',
+            title: 'Pembayaran',
+            start: '2023-12-10',
             color: '#FF4500'
           },
           {
-            title: 'Pembayaran 3',
-            start: '2023-12-31',
-            color: '#FF4500'
+            title: 'Pengambilan',
+            start: '2023-12-04',
+            color: '#32CD32'
           },
           {
-            title: 'Pengambilan 1',
+            title: 'Pengambilan',
+            start: '2023-12-11',
+            color: '#32CD32'
+          },
+          {
+            title: 'Pengambilan',
+            start: '2023-12-18',
+            color: '#32CD32'
+          },
+          {
+            title: 'Pengambilan',
+            start: '2023-12-25',
+            color: '#32CD32'
+          },
+          {
+            title: 'Pengambilan',
             start: '2023-12-07',
             color: '#32CD32'
           },
           {
-            title: 'Pengambilan 2',
+            title: 'Pengambilan',
             start: '2023-12-14',
             color: '#32CD32'
           },
           {
-            title: 'Pengambilan 3',
+            title: 'Pengambilan',
             start: '2023-12-21',
             color: '#32CD32'
           },
           {
-            title: 'Pengambilan 4',
+            title: 'Pengambilan',
             start: '2023-12-28',
             color: '#32CD32'
           },

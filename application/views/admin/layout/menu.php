@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo site_url('admin');?>" class="site_title"><i class="fa fa-paw"></i> <span>NgeTrash</span></a>
+            <a href="<?php echo site_url('adminpetugas');?>" class="site_title"><img src=<?php echo base_url('assets/img/logo-brand.png'); ?> alt="..." style="width:45px; height: 45px;"> <span><b>NgeTrash</b></span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -12,7 +12,7 @@
                 <img src="<?php echo base_url('assets/admin/production/images/user.png'); ?>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Hello Admin,</span>
                 <h2><?php echo $admin->name; ?></h2>
               </div>
             </div>
@@ -25,8 +25,6 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('admin');?>"><i class="fa fa-home"></i> Home </span></a>
-                  </li>
                   <li><a href="<?php echo site_url('adminpetugas');?>"><i class="fa fa-edit"></i> Petugas </a>
                   </li>
                   <li><a href="<?php echo site_url('adminuser');?>"><i class="fa fa-desktop"></i> User </a>
