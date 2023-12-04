@@ -8,12 +8,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manajemen Status</h1>
+                            <h1>Manajemen Daur Ulang</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manajemen Status Pengambilan Sampah</li>
+                                <li class="breadcrumb-item active">Manajemen Daur Ulang</li>
                             </ol>
                         </div>
                     </div>
@@ -27,13 +27,13 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Tambah Status Pengambilan Sampah</h3>
+                                    <h3 class="card-title">Form Tambah Daur Ulang</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/save'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasdaur/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
                                                     <select class="form-control" name="IdUser">
@@ -64,11 +64,27 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label for="status">Keterangan</label>
-                                                    <select class="form-control" name="keterangan">
+                                                <label for="barang">Barang</label>
+                                                <select class="form-control" name="idBarang">
                                                         <option selected>None</option>
-                                                        <option value="1">Belum Bayar</option>
-                                                        <option value="2">Sudah Bayar</option>
+                                                        <?php foreach($barang as $b){?>
+                                                            <option value="<?php echo $b->idBarang; ?>"><?php echo $b->namaBarang;?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <p class="help-block text-danger"></p>
+                                                </div> 
+                                                <div class="control-group">
+                                                    <label for="berat">Berat</label>
+                                                    <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat"/>
+                                                    <p class="help-block text-danger"><?php echo form_error('berat'); ?></p>
+                                                </div>   
+                                                <div class="control-group">
+                                                    <label for="total">Total</label>
+                                                    <select class="form-control" name="total">
+                                                        <option selected>None</option>
+                                                        <?php foreach($total as $t){?>
+                                                            <option value="<?php echo $t->idBarang; ?>"><?php echo $t->harga;?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>

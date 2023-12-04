@@ -58,7 +58,7 @@
                                                         <td><?php echo $i->status; ?></td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasiuran/ubah_status/' . $i->idUser); ?>" class="btn btn-warning">Ubah Iuran</a>
+                                                                <a href="<?php echo site_url('petugasiuran/get_by_id/'.$i->idIuran); ?>" class="btn btn-warning">Ubah Iuran</a>
                                                                 <a href="<?php echo site_url('petugasiuran/delete/' . $i->idIuran); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
