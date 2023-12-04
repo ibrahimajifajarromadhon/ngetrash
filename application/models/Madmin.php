@@ -125,5 +125,58 @@ class Madmin extends CI_Model{
 			);
 	}
 
+	// Di dalam model 'Madmin'
+
+public function getTotalSaldoDaurUlang($idUser) {
+    $this->db->select_sum('total'); 
+    $this->db->where('IdUser', $idUser); 
+    $query = $this->db->get('tbl_daur_ulang'); 
+
+    return $query->row()->total;
+}
+
+public function updateTotalSaldoUser($idUser) {
+    // Ambil total saldo dari tabel daur ulang
+    $totalSaldoDaurUlang = $this->getTotalSaldoDaurUlang($idUser);
+
+    // Ambil data saldo masuk dan keluar pengguna saat ini
+    $userData = $this->get_by_id('tbl_user', array('idUser' => $idUser))->row();
+    $saldoMasuk = $userData->saldoMasuk;
+    $saldoKeluar = $userData->saldoKeluar;
+
+    // Hitung total saldo berdasarkan saldo masuk dan keluar
+    $totalSaldo = $saldoMasuk - $saldoKeluar + $totalSaldoDaurUlang;
+
+    // Update nilai total saldo ke dalam kolom yang sesuai pada tabel pengguna
+    $data = array(
+        'totalSaldo' => $totalSaldo
+    );
+
+    $this->db->where('idUser', $idUser);
+    $this->db->update('tbl_user', $data);
+}
+
+public function get_user_balance($user_id) {
+	// Lakukan query ke basis data untuk mengambil total saldo
+	$this->db->select('totalSaldo');
+	$this->db->where('idUser', $user_id);
+	$query = $this->db->get('tbl_user');
+	return $query->row()->totalSaldo;
+}
+
+// Fungsi untuk mengurangi saldo pengguna berdasarkan ID pengguna dan nominal
+public function reduce_user_balance($user_id, $nominal) {
+	// Ambil saldo saat ini
+	$current_balance = $this->get_user_balance($user_id);
+
+	// Kurangi saldo dengan nominal yang dimasukkan
+	$new_balance = $current_balance - $nominal;
+
+	// Update nilai saldo pada basis data
+	$this->db->set('totalSaldo', $new_balance);
+	$this->db->where('idUser', $user_id);
+	$this->db->update('tbl_user');
+}
+
 }
 ?>

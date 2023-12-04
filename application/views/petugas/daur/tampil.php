@@ -52,12 +52,30 @@
                                                         foreach ($daur as $d) { ?>
                                                     <tr>
                                                         <td><?php echo $no; ?></td>
-                                                        <td><?php echo $d->idUser; ?></td>
-                                                        <td><?php echo $d->idPetugas; ?></td>
+                                                        <td>
+                                                            <?php
+                                                                $user_id = $d->idUser;
+                                                                $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                                echo $user->name;
+                                                            ?>    
+                                                        </td>
+                                                        <td>
+                                                            <?php 
+                                                                $petugas_id = $d->idPetugas;
+                                                                $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                                echo $petugas->name;
+                                                            ?>
+                                                        </td>
                                                         <td><?php echo $d->tanggal; ?></td>
-                                                        <td><?php echo $d->idBarang; ?></td>
-                                                        <td><?php echo $d->berat; ?></td>
-                                                        <td><?php echo $d->total; ?></td>
+                                                        <td>
+                                                            <?php
+                                                                $barang_id = $d->idBarang;
+                                                                $barang = $this->db->get_where('tbl_barang', array('idBarang' => $barang_id))->row();
+                                                                echo $barang->namaBarang;
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $d->berat; ?>kg</td>
+                                                        <td>Rp.<?php echo $d->total; ?></td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="<?php echo site_url('petugasdaur/ubah_status/' . $d->idUser); ?>" class="btn btn-warning">Ubah Iuran</a>

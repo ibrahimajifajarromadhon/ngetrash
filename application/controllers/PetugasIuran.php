@@ -42,12 +42,18 @@ class PetugasIuran extends CI_Controller{
             $tanggal = $this->input->post('tanggal');
             $jenisbayar = $this->input->post('jenisBayar');
             $status = $this->input->post('status');
-            $dataInput = array('IdUser' => $id_u,
-                                'IdPetugas' => $id_p,
+            $nominal = $this->input->post('nominal');
+
+            $dataInput = array('idUser' => $id_u,
+                                'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
                                 'jenisBayar' => $jenisbayar,
                                 'status' => $status);
             $this->Madmin->insert('tbl_iuran_wajib', $dataInput);
+            if ($jenisbayar == '2') { // Jika jenis bayar adalah 'Non Tunai'
+                // Panggil fungsi pada model untuk mengurangi saldo pengguna
+                $this->Madmin->reduce_user_balance($id_u, $nominal);
+            }
             redirect('petugasiuran');
     }
     public function get_by_id($id){

@@ -82,6 +82,7 @@
                                                     <label for="total">Total: </label>
                                                     <b><span id="total"></span></b>
                                                     <p class="help-block text-danger"></p>
+                                                    <input type="hidden" name="totalResult" id="totalResult">
                                                 </div>
 
                                                 <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
@@ -114,22 +115,17 @@
 </div>
 <!-- /page content -->
 <script>
-    // Fungsi untuk menghitung total
     function hitungTotal() {
-        // Ambil nilai berat dari input
         var berat = parseFloat(document.getElementById('berat').value);
 
-        // Ambil nilai harga dari option yang dipilih
         var harga = document.querySelector('select[name="idBarang"] option:checked').getAttribute('data-harga');
         
-        // Hitung total
         var total = berat * harga;
 
-        // Tampilkan total pada elemen dengan id totalResult
         document.getElementById('total').innerText = 'Rp. ' + total;
+        document.getElementById('totalResult').value = total;
     }
 
-    // Panggil fungsi hitungTotal saat nilai berat atau ID barang berubah
     document.getElementById('berat').addEventListener('input', hitungTotal);
     document.querySelector('select[name="idBarang"]').addEventListener('change', hitungTotal);
 </script>

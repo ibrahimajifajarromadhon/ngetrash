@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="form-input col-lg-12 my-4 mt-0">
                                   <label for="exampleInputEmail3" class="form-label fs-6 text-uppercase fw-bold text-black">Total Saldo</label>
-                                  <input type="text" class="form-control ps-3" value="Rp. <?php echo $user->totalSaldo; ?>" disabled></input>
+                                  <input type="text" class="form-control ps-3" value="Rp.  <?php echo number_format($user->totalSaldo, 0, ',', '.'); ?>" disabled></input>
                                 </div>
                               </form>
                             </div>

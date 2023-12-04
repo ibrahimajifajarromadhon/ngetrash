@@ -37,9 +37,9 @@
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
                                                     <select class="form-control" name="IdUser">
-                                                    <option selected>None</option>
-                                                        <?php foreach($user as $u){?>
-                                                            <option value="<?php echo $u->idUser; ?>"><?php echo $u->name;?></option>
+                                                        <option selected>None</option>
+                                                        <?php foreach ($user as $u) { ?>
+                                                            <option value="<?php echo $u->idUser; ?>"><?php echo $u->name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
@@ -47,9 +47,9 @@
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
                                                     <select class="form-control" name="IdPetugas">
-                                                    <option selected>None</option>
-                                                    <?php foreach($petugas1 as $p){?>
-                                                            <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name;?></option>
+                                                        <option selected>None</option>
+                                                        <?php foreach ($petugas1 as $p) { ?>
+                                                            <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
@@ -70,6 +70,11 @@
                                                         <option value="1">Tunai</option>
                                                         <option value="2">Non Tunai</option>
                                                     </select>
+                                                    <p class="help-block text-danger"></p>
+                                                </div>
+                                                <div class="control-group" id="nominalInput" style="display: none;">
+                                                    <label for="nominal">Nominal</label>
+                                                    <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Masukkan Nominal">
                                                     <p class="help-block text-danger"></p>
                                                 </div>
                                                 <div class="control-group">
@@ -111,3 +116,18 @@
 </div>
 </div>
 <!-- /page content -->
+<script>
+    // JavaScript untuk menangani perubahan pada pilihan 'Jenis Bayar'
+    document.addEventListener("DOMContentLoaded", function () {
+        var jenisBayarSelect = document.querySelector('select[name="jenisBayar"]');
+        var nominalInput = document.getElementById('nominalInput');
+
+        jenisBayarSelect.addEventListener('change', function () {
+            if (jenisBayarSelect.value === '2') { // Jika pilihan adalah 'Non Tunai'
+                nominalInput.style.display = 'block'; // Tampilkan input nominal
+            } else {
+                nominalInput.style.display = 'none'; // Sembunyikan input nominal
+            }
+        });
+    });
+</script>

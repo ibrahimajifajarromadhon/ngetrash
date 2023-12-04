@@ -10,6 +10,7 @@ class User extends CI_Controller{
     }
 
 	public function index(){
+
 		$data['user'] = $this->Madmin->get_by_id('tbl_user', array('idUser' => $this->session->userdata('idUser')))->row();
 		$this->load->view('user/layout/header', $data);
 		$this->load->view('user/dashboard');

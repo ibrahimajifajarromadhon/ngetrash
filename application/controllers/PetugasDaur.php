@@ -39,12 +39,13 @@ class PetugasDaur extends CI_Controller{
         if(empty($this->session->userdata('Petugas'))){
             redirect('petugasdaur');
         }
+        
             $id_u = $this->input->post('idUser');
             $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
             $jenisbarang = $this->input->post('idBarang');
             $berat = $this->input->post('berat');
-            $total = $this->input->post('total');
+            $total = $this->input->post('totalResult');
             $dataInput = array('idUser' => $id_u,
                                 'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
@@ -52,6 +53,8 @@ class PetugasDaur extends CI_Controller{
                                 'berat' => $berat,
                                 'total' => $total);
             $this->Madmin->insert('tbl_daur_ulang', $dataInput);
+            $idUser = $this->session->userdata('idUser'); // Ganti sesuai dengan nama kolom yang menyimpan ID pengguna
+            $this->Madmin->updateTotalSaldoUser($idUser);
             redirect('petugasdaur');
     }
 
@@ -87,16 +90,11 @@ class PetugasDaur extends CI_Controller{
 
     public function delete($id){
         if(empty($this->session->userdata('Petugas'))){
-            redirect('petugasdaur');
+            redirect('petugasiuran');
         }
-        $this->Madmin->delete('tbl_iuran_wajib', 'idIuran', $id);
+        $this->Madmin->delete('tbl_daur_ulang', 'idDaur', $id);
         redirect('petugasdaur');
     }
-
-
-    
-
-
 
 }
 
