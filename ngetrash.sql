@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 12:03 PM
+-- Generation Time: Dec 04, 2023 at 04:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,8 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`idAdmin`, `name`, `userName`, `password`) VALUES
-(7, 'Admin', 'admin', '$2y$10$YCevMzNdlblbzfczKwDOIe15RMaTBJbPTG6MoRNpTO3AjiALDQCQ.');
+(7, 'Admin', 'admin', '$2y$10$YCevMzNdlblbzfczKwDOIe15RMaTBJbPTG6MoRNpTO3AjiALDQCQ.'),
+(8, 'ibrahim', 'ibrahim', '$2y$10$qL.mYFRaled86rnXRQvd.O1Tpn4e3gA2Mm0iyRvK2TKny5K.L3WN2');
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,7 @@ CREATE TABLE `tbl_daur_ulang` (
 --
 
 INSERT INTO `tbl_daur_ulang` (`idDaur`, `tanggal`, `berat`, `total`, `idBarang`, `idUser`, `idPetugas`) VALUES
-(1, '2023-11-27', 1, 10000, 2, 1, 8);
+(2, '2023-11-01', 1, 0, 2, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ CREATE TABLE `tbl_iuran_wajib` (
   `tanggal` date NOT NULL,
   `status` enum('Sudah Bayar','Belum Bayar') NOT NULL,
   `jenisBayar` enum('Tunai','Non Tunai') NOT NULL,
-  `idUser` int(5) NOT NULL,
+  `idUser` int(5) DEFAULT NULL,
   `idPetugas` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -103,7 +104,9 @@ CREATE TABLE `tbl_iuran_wajib` (
 --
 
 INSERT INTO `tbl_iuran_wajib` (`idIuran`, `tanggal`, `status`, `jenisBayar`, `idUser`, `idPetugas`) VALUES
-(1, '2023-11-01', 'Belum Bayar', 'Tunai', 1, 8);
+(2, '2023-11-01', 'Sudah Bayar', 'Non Tunai', 3, 8),
+(5, '2023-11-01', 'Sudah Bayar', 'Tunai', 3, 6),
+(9, '2023-11-01', 'Sudah Bayar', 'Tunai', 3, 8);
 
 -- --------------------------------------------------------
 
@@ -125,8 +128,7 @@ CREATE TABLE `tbl_petugas` (
 
 INSERT INTO `tbl_petugas` (`idPetugas`, `name`, `userName`, `password`, `statusAktif`) VALUES
 (6, 'ibrahim', 'ibrahim', '$2y$10$fNqgExKyjWlrEUtRvBdXJuH6oSfornb/BPXb2zJHklgPAw.g4rmE6', 'N'),
-(8, 'admin', 'admin', '$2y$10$LrYZpr2pM4UwtxzOYhQUJe3wbJHL39Ml1308z2b3tgQSTO84liVRa', 'Y'),
-(9, 'Udin', 'udin', '$2y$10$yxnwWccpvg7G.YlkG/cIXuqYqhbc99M838uw1VJ/0YBFJlvd/2IjC', 'N');
+(8, 'Admin', 'admin', '$2y$10$LrYZpr2pM4UwtxzOYhQUJe3wbJHL39Ml1308z2b3tgQSTO84liVRa', 'Y');
 
 -- --------------------------------------------------------
 
@@ -147,7 +149,10 @@ CREATE TABLE `tbl_status_pengambilan` (
 --
 
 INSERT INTO `tbl_status_pengambilan` (`idStatus`, `keterangan`, `tanggal`, `idUser`, `idPetugas`) VALUES
-(1, 'Sudah Diambil', '2023-11-27', 1, 8);
+(2, 'Belum Diambil', '2023-11-01', 3, 8),
+(4, 'Sudah Diambil', '2023-11-01', 4, 6),
+(9, 'Belum Diambil', '2023-11-01', 4, 8),
+(10, 'Sudah Diambil', '2023-11-01', 3, 8);
 
 -- --------------------------------------------------------
 
@@ -172,7 +177,8 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`idUser`, `name`, `userName`, `password`, `alamat`, `saldoMasuk`, `saldoKeluar`, `totalSaldo`, `statusAktif`) VALUES
-(1, 'Alex', 'alex', 'alex', 'Jogja', 10000, 5000, 5000, 'Y');
+(3, 'admin', 'admin', '$2y$10$YrZqe4ylM5ekDEoTkxvIbuAHRlR5gbcgyV/YUvVlXD2S0qOAKtZxO', 'jogja', 0, 0, 10000, 'Y'),
+(4, 'Ibrahim', 'ibrahim', '$2y$10$9lGNXNAAXm5TD8NF7eUsweRpc9XwgKS75itx9eQ04XZjbDMhK0S/y', 'Klaten', 0, 0, 0, 'N');
 
 --
 -- Indexes for dumped tables
@@ -195,17 +201,17 @@ ALTER TABLE `tbl_barang`
 --
 ALTER TABLE `tbl_daur_ulang`
   ADD PRIMARY KEY (`idDaur`),
-  ADD UNIQUE KEY `idPetugas` (`idPetugas`),
-  ADD UNIQUE KEY `idUser` (`idUser`),
-  ADD KEY `idBarang` (`idBarang`);
+  ADD KEY `idBarang` (`idBarang`),
+  ADD KEY `idPetugas` (`idPetugas`) USING BTREE,
+  ADD KEY `idUser` (`idUser`) USING BTREE;
 
 --
 -- Indexes for table `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
   ADD PRIMARY KEY (`idIuran`),
-  ADD UNIQUE KEY `idPetugas` (`idPetugas`),
-  ADD KEY `idUser` (`idUser`);
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idPetugas` (`idPetugas`);
 
 --
 -- Indexes for table `tbl_petugas`
@@ -218,8 +224,8 @@ ALTER TABLE `tbl_petugas`
 --
 ALTER TABLE `tbl_status_pengambilan`
   ADD PRIMARY KEY (`idStatus`),
-  ADD UNIQUE KEY `idPetugas` (`idPetugas`),
-  ADD KEY `idUser` (`idUser`);
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idPetugas` (`idPetugas`) USING BTREE;
 
 --
 -- Indexes for table `tbl_user`
@@ -235,7 +241,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `idAdmin` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idAdmin` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_barang`
@@ -247,31 +253,31 @@ ALTER TABLE `tbl_barang`
 -- AUTO_INCREMENT for table `tbl_daur_ulang`
 --
 ALTER TABLE `tbl_daur_ulang`
-  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
-  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_petugas`
 --
 ALTER TABLE `tbl_petugas`
-  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
-  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

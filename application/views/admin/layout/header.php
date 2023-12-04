@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <link rel="icon" type="image/png" href="<?php echo base_url('assets/img/logo.png'); ?>">
 
     <title>Dashboard Admin | NgeTrash</title>
 
@@ -44,7 +44,7 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url('assets/admin/production/images/user.png'); ?>" alt="">John Doe
+                    <img src="<?php echo base_url('assets/admin/production/images/user.png'); ?>" alt=""><?php echo $admin->name; ?>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>

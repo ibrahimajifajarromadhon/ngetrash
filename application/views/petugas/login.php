@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="<?php echo base_url('assets/img/logo.png'); ?>">
 
   <title>Login Petugas | NgeTrash</title>
   
@@ -28,7 +29,7 @@
   <div>
     <div class="login_wrapper">
         <section class="login_content">
-          <form action="<?php echo site_url('petugas/login'); ?>" method="post">
+          <form action="<?php echo site_url('petugas/login_aksi'); ?>" method="post">
             <h1><b>Login Petugas</b></h1>
             <?php if(isset($error_message)) { ?> 
               <?php echo $error_message; ?>

@@ -31,8 +31,14 @@ class Madmin extends CI_Model{
 		return false;
 	}
 
+
+
     public function save_admin($data) {
         $this->db->insert('tbl_admin', $data);
+    }
+
+	public function save_user($data) {
+        $this->db->insert('tbl_user', $data);
     }
 
 	public function get_all_data($tabel){
@@ -62,19 +68,61 @@ class Madmin extends CI_Model{
     }
 
 	
-	public function cek_login_petugas($u, $p){
-		$query = $this->db->get_where('tbl_petugas', array('userName' => $u, 'statusAktif' => 'Y'));
+	public function cek_login_user($u, $p){
+		$query = $this->db->get_where('tbl_user', array('userName' => $u,'statusAktif' => 'Y' ));
 		$check = $query->num_rows();
-		$akun = $query->row_object();
-	
-		if ($check==1) {
-			$hashed_password = $akun->password;
-			if (password_verify($p, $hashed_password)) {
-				return true;
+		$account = $query->row_object();
+		$hash = $account->password;
+			if($check == 1){
+				if(password_verify($p, $hash)){
+					return array(
+						'loggedIn' => true, 
+						'idUser' => $account->idUser
+					);
+				}
 			}
-		}
-	
-		return false;
+			return array(
+				'loggedIn' => false, 
+				'idUser' => $account->idUser
+			);
+	}
+
+	public function cek_login_admin($u, $p){
+		$query = $this->db->get_where('tbl_admin', array('userName' => $u ));
+		$check = $query->num_rows();
+		$account = $query->row_object();
+		$hash = $account->password;
+			if($check == 1){
+				if(password_verify($p, $hash)){
+					return array(
+						'loggedIn' => true, 
+						'idAdmin' => $account->idAdmin
+					);
+				}
+			}
+			return array(
+				'loggedIn' => false, 
+				'idAdmin' => $account->idAdmin
+			);
+	}
+
+	public function cek_login_petugas($u, $p){
+		$query = $this->db->get_where('tbl_petugas', array('userName' => $u ));
+		$check = $query->num_rows();
+		$account = $query->row_object();
+		$hash = $account->password;
+			if($check == 1){
+				if(password_verify($p, $hash)){
+					return array(
+						'loggedIn' => true, 
+						'idPetugas' => $account->idPetugas
+					);
+				}
+			}
+			return array(
+				'loggedIn' => false, 
+				'idPetugas' => $account->idPetugas
+			);
 	}
 
 }

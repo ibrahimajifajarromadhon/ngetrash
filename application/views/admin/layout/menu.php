@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>NgeTrash</span></a>
+              <a href="<?php echo site_url('admin');?>" class="site_title"><i class="fa fa-paw"></i> <span>NgeTrash</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -13,7 +13,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><?php echo $admin->name; ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -25,7 +25,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('admin/dashboard');?>"><i class="fa fa-home"></i> Home </span></a>
+                  <li><a href="<?php echo site_url('admin');?>"><i class="fa fa-home"></i> Home </span></a>
                   </li>
                   <li><a href="<?php echo site_url('adminpetugas');?>"><i class="fa fa-edit"></i> Petugas </a>
                   </li>

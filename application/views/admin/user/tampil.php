@@ -56,11 +56,11 @@
                                                         <td><?php echo $usr->saldoMasuk; ?></td>
                                                         <td><?php echo $usr->saldoKeluar; ?></td>
                                                         <td><?php echo $usr->totalSaldo; ?></td>
-                                                        <td><?php if ($usr->statusAktif == "Y") {
+                                                        <td style="color: <?php echo ($usr->statusAktif == 'Y') ? 'green' : 'red'; ?>;"><b><?php if ($usr->statusAktif == "Y") {
                                                                 echo "Aktif";
                                                             } else {
                                                                 echo "Tidak Aktif";
-                                                            } ?></td>
+                                                            } ?></b></td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="<?php echo site_url('adminuser/ubah_status/' . $usr->idUser); ?>" class="btn btn-warning">Ubah Status</a>

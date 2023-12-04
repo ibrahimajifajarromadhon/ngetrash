@@ -48,11 +48,11 @@
                                                         <td><?php echo $no; ?></td>
                                                         <td><?php echo $p->name; ?></td>
                                                         <td><?php echo $p->userName; ?></td>
-                                                        <td><?php if ($p->statusAktif == "Y") {
+                                                        <td style="color: <?php echo ($p->statusAktif == 'Y') ? 'green' : 'red'; ?>;"><b><?php if ($p->statusAktif == "Y") {
                                                                 echo "Aktif";
                                                             } else {
                                                                 echo "Tidak Aktif";
-                                                            } ?></td>
+                                                            } ?></b></td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="<?php echo site_url('adminpetugas/ubah_status/' . $p->idPetugas); ?>" class="btn btn-warning">Ubah Status</a>

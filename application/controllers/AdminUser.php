@@ -9,20 +9,21 @@ class AdminUser extends CI_Controller{
     }
 
     public function index(){
-        if(empty($this->session->userdata('userName'))){
-            redirect('admin');
-        }
+        if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
+        $data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
         $data['user']=$this->Madmin->get_all_data('tbl_user')->result();
-        $this->load->view('admin/layout/header');
-        $this->load->view('admin/layout/menu');
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/layout/menu', $data);
         $this->load->view('admin/user/tampil', $data);
         $this->load->view('admin/layout/footer');
     }
 
     public function ubah_status($id) {
-        if (empty($this->session->userdata('userName'))) {
-            redirect('admin');
-        }
+        if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
         $datawhere = array('idUser'=>$id);
         $result = $this->Madmin->get_by_id('tbl_user', $datawhere)->row_object();
         $status = $result->statusAktif;
@@ -36,9 +37,9 @@ class AdminUser extends CI_Controller{
         }
 
     public function delete($id) {
-        if (empty($this->session->userdata('userName'))) {
-            redirect('admin');
-        }
+        if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
         $this->Madmin->delete('tbl_user', 'idUser', $id);
         redirect('adminuser');
     }
