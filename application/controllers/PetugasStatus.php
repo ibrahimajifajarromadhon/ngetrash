@@ -14,7 +14,8 @@ class PetugasStatus extends CI_Controller{
 		}
         $data['status']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
         $data['petugas'] = $this->Madmin->get_by_id('tbl_petugas', array('idPetugas' => $this->session->userdata('idPetugas')))->row();
-		$this->load->view('petugas/layout/header', $data);
+        $data['petugas1']=$this->Madmin->get_all_data('tbl_petugas')->result();
+        $this->load->view('petugas/layout/header', $data);
 		$this->load->view('petugas/layout/menu', $data);
         $this->load->view('petugas/status/tampil', $data);
         $this->load->view('petugas/layout/footer');
@@ -37,12 +38,12 @@ class PetugasStatus extends CI_Controller{
         if(empty($this->session->userdata('Petugas'))){
             redirect('petugasstatus');
         }
-            $id_u = $this->input->post('IdUser');
-            $id_p = $this->input->post('IdPetugas');
+            $id_u = $this->input->post('idUser');
+            $id_p = $this->input->post('idPetugas');
             $tanggal = $this->input->post('tanggal');
             $keterangan = $this->input->post('keterangan');
-            $dataInput = array('IdUser' => $id_u,
-                                'IdPetugas' => $id_p,
+            $dataInput = array('idUser' => $id_u,
+                                'idPetugas' => $id_p,
                                 'tanggal' => $tanggal,
                                 'keterangan' => $keterangan);
             $this->Madmin->insert('tbl_status_pengambilan', $dataInput);
@@ -61,34 +62,22 @@ class PetugasStatus extends CI_Controller{
         $this->load->view('petugas/status/form_edit', $data);
         $this->load->view('petugas/layout/footer');
     }
-    public function edit($id){
-        $data['status'] = $this->Madmin->get_by_id('tbl_status_pengambilan', array('idStatus' => $id))->row();
-        $this->load->view('petugas/layout/header');
-        $this->load->view('petugas/layout/menu');
-        $this->load->view('petugas/status/form_edit', $data);
-        $this->load->view('petugas/layout/footer');
-    }
-    public function update(){
-        
-        $data['user']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
-        $data['petugas']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
-        $data['tanggal']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
-        $data['keterangan']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
+    public function edit(){
+        if(empty($this->session->userdata('Petugas'))){
+            redirect('petugas/login');
+        }
+            $id = $this->input->post('id');
+            $id_u = $this->input->post('idUser');
+            $id_p = $this->input->post('idPetugas');
+            $tanggal = $this->input->post('tanggal');
+            $keterangan = $this->input->post('keterangan');
 
-        $id = $this->input->post('idStatus');
-        $id_user = $this->input->post('IdUser');
-        $id_petugas = $this->input->post('IdPetugas');
-        $Tanggal = $this->input->post('tanggal');
-        $Keterangan = $this->input->post('keterangan');
-        $dataUpdate = array('IdUser' => $id_user,
-                            'IdPetugas' => $id_petugas,
-                            'tanggal' => $Tanggal,
-                            'keterangan' => $Keterangan);
-        $this->Madmin->update('tbl_status_pengambilan', $dataUpdate, 'idStatus', $id);                    
-		$this->load->view('petugas/layout/header');
-        $this->load->view('petugas/layout/menu');
-		$this->load->view('petugas/status/form_edit', $data);
-		$this->load->view('petugas/layout/footer');
+            $dataUpdate = array('idUser' => $id_u,
+                                'idPetugas' => $id_p,
+                                'tanggal' => $tanggal,
+                                'keterangan' => $keterangan);
+            $this->Madmin->update('tbl_status_pengambilan', $dataUpdate, 'idStatus', $id);
+            redirect('petugasstatus');
 	}
 
     public function delete($id){

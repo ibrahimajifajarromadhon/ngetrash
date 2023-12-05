@@ -36,7 +36,7 @@
                                             <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <select class="form-control" name="IdUser">
+                                                    <select class="form-control" name="idUser">
                                                     <option selected>None</option>
                                                         <?php foreach($user as $u){?>
                                                             <option value="<?php echo $u->idUser; ?>"><?php echo $u->name;?></option>
@@ -46,9 +46,9 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <select class="form-control" name="IdPetugas">
+                                                    <select class="form-control" name="idPetugas">
                                                     <option selected>None</option>
-                                                    <?php foreach($petugas as $p){?>
+                                                    <?php foreach($petugas1 as $p){?>
                                                             <option value="<?php echo $p->idPetugas; ?>"><?php echo $p->name;?></option>
                                                         <?php } ?>
                                                     </select>
@@ -67,8 +67,8 @@
                                                     <label for="status">Keterangan</label>
                                                     <select class="form-control" name="keterangan">
                                                         <option selected>None</option>
-                                                        <option value="1">Belum diambil</option>
-                                                        <option value="2">Sudah diambil</option>
+                                                        <option value="1">Belum Diambil</option>
+                                                        <option value="2">Sudah Diambil</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>

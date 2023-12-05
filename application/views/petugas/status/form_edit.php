@@ -33,10 +33,12 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/update' . $status->idStatus); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/edit'); ?>" >
+                                                <input type="hidden" name="id" value="<?php echo $status->idStatus; ?>">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
-                                                    <input class="form-control" name="IdUser" value=<?php
+                                                    <input type="hidden" name="idUser" value="<?php echo $status->idUser; ?>">
+                                                    <input class="form-control" value=<?php
                                                             $user_id = $status->idUser;
                                                             $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
                                                             echo $user->name;
@@ -46,7 +48,8 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="idPetugas">Nama Petugas</label>
-                                                    <input class="form-control" name="IdUser" value=<?php
+                                                    <input type="hidden" name="idPetugas" value="<?php echo $status->idPetugas; ?>">
+                                                    <input class="form-control" value=<?php
                                                             $petugas_id = $status->idPetugas;
                                                             $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
                                                             echo $petugas->name;
@@ -57,12 +60,13 @@
                                                 <div class="control-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
-                                                        <input type="date" name='tanggal' class="form-control" name="IdUser" value=<?php
-                                                            $user_id = $status->idStatus;
-                                                            $user = $this->db->get_where('tbl_status_pengambilan', array('idStatus' => $user_id))->row();
-                                                            echo $user->tanggal;
+                                                    <input type="hidden" name="tanggal" value="<?php echo $status->tanggal; ?>">
+                                                    <input type="date" class="form-control" value=<?php
+                                                            $status_id = $status->idStatus;
+                                                            $status = $this->db->get_where('tbl_status_pengambilan', array('idStatus' => $status_id))->row();
+                                                            echo $status->tanggal;
                                                             ?> disabled>
-                                                    </input>
+                                                        </input>
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-th"></span>
                                                         </div>
@@ -71,9 +75,8 @@
                                                 <div class="control-group">
                                                     <label for="keterangan">Keterangan</label>
                                                     <select class="form-control" name="keterangan">
-                                                        <option selected>None</option>
-                                                        <option value="1">Sudah diambil</option>
-                                                        <option value="2">Belum diambilr</option>
+                                                        <option selected value="1">Belum diambil</option>
+                                                        <option value="2">Sudah diambil</option>
                                                     </select>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
