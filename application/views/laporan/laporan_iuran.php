@@ -7,12 +7,12 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                    <h1>Manajemen User</h1>
+                                    <h1>Laporan Data Iuran Wajib</h1>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">Manajemen User</li>
+                                        <li class="breadcrumb-item active">Laporan Data Iuran Wajib</li>
                                     </ol>
                                 </div>
                             </div>
@@ -26,46 +26,53 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Data User</h3>
+                                            <div class="row justify-content-between">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <h3 class="card-title">Laporan Data Iuran Wajib</h3>
+
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mt-2">
+                                                    <div class="form-group">
+                                                        <a target="blank" href="<?php echo site_url('Admin/print_iuran/'); ?>" class="btn btn-success btn-block rounded-0 shadow-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 5px">No</th>
+                                                        <th style="width: 10px">No.</th>
                                                         <th>Nama User</th>
-                                                        <th>Username</th>
-                                                        <th>Alamat</th>
-                                                        <th>Saldo Masuk</th>
-                                                        <th>Saldo Keluar</th>
-                                                        <th>Total Saldo</th>
-                                                        <th style="width: 110px">Status Aktif</th>
-                                                        <th style="width: 230px">Aksi</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Jenis Bayar</th>
+                                                        <th>Status</th>
+                                                        <th>Nama Petugas</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <?php $no = 1;
-                                                        foreach ($user as $usr) { ?>
+                                                        foreach ($data_iuran as $i) { ?>
                                                     <tr>
                                                         <td><?php echo $no; ?></td>
-                                                        <td><?php echo $usr->name; ?></td>
-                                                        <td><?php echo $usr->userName; ?></td>
-                                                        <td><?php echo $usr->alamat; ?></td>
-                                                        <td><?php echo $usr->saldoMasuk; ?></td>
-                                                        <td><?php echo $usr->saldoKeluar; ?></td>
-                                                        <td><?php echo $usr->totalSaldo; ?></td>
-                                                        <td><b style="background-color: <?php echo ($usr->statusAktif == 'Y') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php if ($usr->statusAktif == "Y") {
-                                                                                                                                                                                                            echo "Aktif";
-                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                            echo "Tidak Aktif";
-                                                                                                                                                                                                        } ?></b></td>
                                                         <td>
-                                                            <div class="btn-group">
-                                                                <a href="<?php echo site_url('adminuser/ubah_status/' . $usr->idUser); ?>" class="btn btn-warning">Ubah Status</a>
-                                                                <a href="<?php echo site_url('adminuser/delete/' . $usr->idUser); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
-                                                            </div>
+                                                            <?php
+                                                            $user_id = $i->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $i->tanggal; ?></td>
+                                                        <td><b><?php echo $i->jenisBayar; ?></b></td>
+                                                        <td><b><?php echo $i->status; ?></b></td>
+                                                        <td>
+                                                            <?php
+                                                            $petugas_id = $i->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
+                                                            ?>
                                                         </td>
                                                     </tr>
                                                 <?php $no++;

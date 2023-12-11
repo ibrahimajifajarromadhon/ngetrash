@@ -172,6 +172,11 @@ class Madmin extends CI_Model{
 		$this->db->where('idUser', $idUser);
 		$this->db->update('tbl_user', $data);
 	}
-	
+
+	public function get_petugas($petugas) {
+        $this->db->where('idPetugas', $petugas);
+        return $this->db->get('tbl_petugas')->result();
+    }
+
 }
 ?>

@@ -32,7 +32,7 @@
   <section id="calender">
     <div class="container">
       <div class="row">
-        <h1 class="mb-5 w-60">JADWAL PENGAMBILAN SAMPAH</h1>
+        <h1 class="mb-5 text-center">Jadwal Pengambilan Sampah</h1>
         <div class="row">
           <div class="col-md-12">
             <div id='calendar'></div>
@@ -45,9 +45,9 @@
   <!-- Services Section Starts -->
   <section id="services" class="my-5">
     <div class="container ">
-      <h1 class="text-center my-5">Macam-Macam Sampah</h1>
-      <div class="row py-5">
-        <div class="col-md-3">
+      <h1 class="text-center my-5">Jenis-Jenis Sampah</h1>
+      <div class="row py-1">
+        <div class="col-md-3 mt-2">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/organik.png'); ?>" style="width: 150px; height: 200px;" alt="">
@@ -68,66 +68,118 @@
                 - Dibuat menjadi tambahan pakan hewan,dll
               </p><br />
             </div>
+            <hr>
+            <h2 class="text-center" style="font-weight: 700; color: green;">Rp. 10.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/plastik.png'); ?>" style="width: 150px; height: 200px;" alt="">
             </div>
-            <h3>Sampah Anorganik</h3>
-            <p>Sampah anorganik adalah sampah yang sulit untuk membusuk dan tidak bisa terurai.<br /><br />
-              Contoh:<br />
-              - Plastik bekas<br />
-              - Gelas bekas air mineral<br />
-              - Botol minuman dan plastik,dll<br /><br />
+            <div class="text-align-center">
+              <h3>Sampah Anorganik</h3>
+              <p>Sampah anorganik adalah sampah yang sulit untuk membusuk dan tidak bisa terurai.<br /><br />
+                Contoh:<br />
+                - Plastik bekas<br />
+                - Gelas bekas air mineral<br />
+                - Botol minuman dan plastik,dll<br /><br />
 
-              Pengolahannya:<br />
-              - Dijadikan kerajinan tangan<br />
-              - Diolah dan digunakan kembali menjadi produk baru seperti pot, tempat pensil, dll<br /></p>
+                Pengolahannya:<br />
+                - Dijadikan kerajinan tangan<br />
+                - Diolah dan digunakan kembali menjadi produk baru seperti pot, tempat pensil, dll<br /></p>
+            </div><br>
+            <hr>
+            <h2 class="text-center" style="font-weight: 700; color: red;">Rp. 15.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/kertas.png'); ?>" style="width: 150px; height: 200px;" alt="">
             </div>
-            <h3>Sampah Kertas</h3>
-            <p>Sampah Kertas adalah Semua sampah yang memiliki bahan serat kayu (selulosa dan hemiselulosa) dari pohon<br /><br />
+            <div class="text-align-center">
+              <h3>Sampah Kertas</h3>
+              <p>Sampah Kertas adalah Semua sampah yang memiliki bahan serat kayu (selulosa dan hemiselulosa) dari pohon<br /><br />
 
-              Contoh:<br />
-              - Kertas<br />
-              - Kardus<br />
-              - Koran<br /><br />
+                Contoh:<br />
+                - Kertas<br />
+                - Kardus<br />
+                - Koran<br /><br />
 
-              Pengolahannya:<br />
-              - Didaur Ulang menjadi kertas yang baru<br />
-              - Dibuat menjadi Kompos<br />
-              - Dijadikan kerajinan tangan<br /></p>
+                Pengolahannya:<br />
+                - Didaur Ulang menjadi kertas yang baru<br />
+                - Dibuat menjadi Kompos<br />
+                - Dijadikan kerajinan tangan<br /></p>
+            </div><br>
+            <hr>
+            <h2 class="text-center" style="font-weight: 700; color: orange;">Rp. 5.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-2">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/besi.png'); ?>" style="width: 150px; height: 200px;" alt="">
             </div>
-            <h3>Sampah B3</h3>
-            <p>Sampah B3 biasanya merupakan sisa dari pengolahan bahan yang berbahaya.<br /><br />
+            <div class="text-align-center">
+              <h3>Sampah B3</h3>
+              <p>Sampah B3 biasanya merupakan sisa dari pengolahan bahan yang berbahaya.<br /><br />
 
-              Contoh:<br />
-              - Sampah beling<br />
-              - Kaca<br />
-              - Bekas kemasan Desinfektan<br />
-              - Bekas parfum atau pengharum ruangan<br />
-              - Bekas detergen<br />
-              - Lem<br />
-              - Baterai,dll<br /><br />
+                Contoh:<br />
+                - Sampah beling<br />
+                - Kaca<br />
+                - Bekas kemasan Desinfektan<br />
+                - Bekas parfum atau pengharum ruangan<br />
+                - Bekas detergen<br />
+                - Lem<br />
+                - Baterai,dll<br /><br />
 
-              Pengolahannya:<br />
-              - Diolah dengan cara thermal, stabilisasi, solidifikasi secara fisika, kimia, maupun biologi dengan cara teknologi bersih atau ramah lingkungan<br /></p>
+                Pengolahannya:<br />
+                - Diolah dengan cara thermal, stabilisasi, solidifikasi secara fisika, kimia, maupun biologi dengan cara teknologi bersih atau ramah lingkungan<br /></p>
+            </div><br>
+            <hr>
+            <h2 class="text-center" style="font-weight: 700; color: grey;">Rp. 7.500/kg</h2>
           </div>
         </div>
       </div>
 
     </div>
+  </section>
+
+  <section id="pricing" class="pricing-content section-padding mb-5">
+    <div class="container">
+      <h1 class="text-center my-5">Harga Iuran Wajib</h1>
+      <div class="row text-center">
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+          <div class="pricing_design">
+            <div class="single-pricing">
+              <div class="price-head">
+                <h2>1 Bulan</h2>
+                <h1>Rp. 30.000</h1>
+              </div>
+            </div>
+          </div>
+        </div><!--- END COL -->
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+          <div class="pricing_design">
+            <div class="single-pricing">
+              <div class="price-head">
+                <h2>6 Bulan</h2>
+                <h1>Rp. 150.000</h1>
+              </div>
+            </div>
+          </div>
+        </div><!--- END COL -->
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+          <div class="pricing_design">
+            <div class="single-pricing">
+              <div class="price-head">
+                <h2>1 Tahun</h2>
+                <h1>Rp. 300.000</h1>
+              </div>
+            </div>
+          </div>
+        </div><!--- END COL -->
+      </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
   </section>

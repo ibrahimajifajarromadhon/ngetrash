@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2023 at 09:56 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Waktu pembuatan: 11 Des 2023 pada 15.05
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_admin`
+-- Struktur dari tabel `tbl_admin`
 --
 
 CREATE TABLE `tbl_admin` (
@@ -35,16 +35,16 @@ CREATE TABLE `tbl_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_admin`
+-- Dumping data untuk tabel `tbl_admin`
 --
 
 INSERT INTO `tbl_admin` (`idAdmin`, `name`, `userName`, `password`) VALUES
-(7, 'Admin', 'admin', '$2y$10$YCevMzNdlblbzfczKwDOIe15RMaTBJbPTG6MoRNpTO3AjiALDQCQ.');
+(11, 'Admin', 'admin@gmail.com', '$2y$10$bWXUyySPqsKaL7VV8UkjRu/LJ8V/xrPCKjFfck335kFe.XAgV58ta');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_barang`
+-- Struktur dari tabel `tbl_barang`
 --
 
 CREATE TABLE `tbl_barang` (
@@ -54,17 +54,19 @@ CREATE TABLE `tbl_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_barang`
+-- Dumping data untuk tabel `tbl_barang`
 --
 
 INSERT INTO `tbl_barang` (`idBarang`, `namaBarang`, `harga`) VALUES
-(2, 'Plastik', 10000),
-(3, 'Kardus', 15000);
+(1, 'Sampah Organik', 10000),
+(2, 'Sampah Anorganik', 15000),
+(3, 'Sampah B3', 7500),
+(4, 'Sampah Kertas', 5000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_daur_ulang`
+-- Struktur dari tabel `tbl_daur_ulang`
 --
 
 CREATE TABLE `tbl_daur_ulang` (
@@ -78,16 +80,20 @@ CREATE TABLE `tbl_daur_ulang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_daur_ulang`
+-- Dumping data untuk tabel `tbl_daur_ulang`
 --
 
 INSERT INTO `tbl_daur_ulang` (`idDaur`, `tanggal`, `berat`, `total`, `idBarang`, `idUser`, `idPetugas`) VALUES
-(40, '2023-12-05', 5, 50000, 2, 5, 12);
+(46, '2023-12-04', 1, 10000, 1, 6, 14),
+(47, '2023-12-07', 2, 30000, 2, 8, 14),
+(48, '2023-12-11', 1, 7500, 3, 9, 14),
+(49, '2023-12-11', 3, 45000, 2, 6, 14),
+(50, '2023-12-11', 1, 15000, 2, 8, 14);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_iuran_wajib`
+-- Struktur dari tabel `tbl_iuran_wajib`
 --
 
 CREATE TABLE `tbl_iuran_wajib` (
@@ -100,16 +106,19 @@ CREATE TABLE `tbl_iuran_wajib` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_iuran_wajib`
+-- Dumping data untuk tabel `tbl_iuran_wajib`
 --
 
 INSERT INTO `tbl_iuran_wajib` (`idIuran`, `tanggal`, `status`, `jenisBayar`, `idUser`, `idPetugas`) VALUES
-(38, '2023-12-05', 'Sudah Bayar', 'Non Tunai', 5, 12);
+(49, '2023-12-10', 'Sudah Bayar', 'Tunai', 6, 14),
+(50, '2023-12-10', 'Belum Bayar', 'Tunai', 9, 14),
+(51, '2023-12-10', 'Sudah Bayar', 'Tunai', 10, 14),
+(52, '2023-12-10', 'Sudah Bayar', 'Tunai', 8, 14);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_petugas`
+-- Struktur dari tabel `tbl_petugas`
 --
 
 CREATE TABLE `tbl_petugas` (
@@ -121,16 +130,20 @@ CREATE TABLE `tbl_petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_petugas`
+-- Dumping data untuk tabel `tbl_petugas`
 --
 
 INSERT INTO `tbl_petugas` (`idPetugas`, `name`, `userName`, `password`, `statusAktif`) VALUES
-(12, 'Petugas', 'petugas@gmail.com', '$2y$10$ldJ2uCaiHJQjT3MmK/GhxObh9vNZaX/RVxLhM1uHI38WdlpPntikC', 'Y');
+(14, 'Ibrahim', 'ibrahim@gmail.com', '$2y$10$DaoWg8rvEAKHehaUIX3GIe5JQ1y4U2k.ZkXCLEiBaLp9cgvl5UZaq', 'Y'),
+(15, 'Naufal', 'naufal@gmail.com', '$2y$10$4y/q2lSstXDE3InhxriIGOG7fYFp/PoMAiRbLMQfeLwSS50pAD/Y6', 'Y'),
+(16, 'Iqbal', 'iqbal@gmail.com', '$2y$10$iqQKHnI3tlDJPGau.xivR.hwlSAYvxpCHehcyv14uMjp8pAE4dNo.', 'Y'),
+(17, 'Samuel', 'samuel@gmail.com', '$2y$10$2SVR4JHVi314agCteZPnHONbqX.n1zdducswR2i74Y3WeIJc1JT2.', 'N'),
+(18, 'Bambang', 'bambang@gmail.com', '$2y$10$73pwWOT/AtTm9cxJJQYgv.xxFsbVJICzr.gUrom9GC5r/dRoA/xtC', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_riwayat_transaksi`
+-- Struktur dari tabel `tbl_riwayat_transaksi`
 --
 
 CREATE TABLE `tbl_riwayat_transaksi` (
@@ -143,17 +156,25 @@ CREATE TABLE `tbl_riwayat_transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_riwayat_transaksi`
+-- Dumping data untuk tabel `tbl_riwayat_transaksi`
 --
 
 INSERT INTO `tbl_riwayat_transaksi` (`idTransaksi`, `idUser`, `jenis_transaksi`, `jumlah`, `keterangan`, `tanggal_transaksi`) VALUES
-(33, 5, 'masuk', 50000.00, 'Daur ulang', '2023-12-04 20:37:59'),
-(34, 5, 'keluar', 10000.00, 'Pengeluaran Iuran Wajib', '2023-12-04 20:38:43');
+(35, 6, 'masuk', 80000.00, 'Daur ulang', '2023-12-11 09:55:16'),
+(37, 8, 'masuk', 60000.00, 'Daur ulang', '2023-12-11 09:56:17'),
+(38, 9, 'masuk', 70000.00, 'Daur ulang', '2023-12-11 09:56:41'),
+(39, 10, 'masuk', 75000.00, 'Daur ulang', '2023-12-11 09:57:07'),
+(40, 6, 'masuk', 10000.00, 'Daur ulang', '2023-12-11 10:45:45'),
+(41, 8, 'masuk', 30000.00, 'Daur ulang', '2023-12-11 10:46:03'),
+(42, 9, 'masuk', 10000.00, 'Daur ulang', '2023-12-11 10:46:17'),
+(43, 9, 'masuk', 7500.00, 'Daur ulang', '2023-12-11 10:46:28'),
+(44, 6, 'masuk', 45000.00, 'Daur ulang', '2023-12-11 10:46:45'),
+(45, 8, 'masuk', 15000.00, 'Daur ulang', '2023-12-11 10:47:13');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_status_pengambilan`
+-- Struktur dari tabel `tbl_status_pengambilan`
 --
 
 CREATE TABLE `tbl_status_pengambilan` (
@@ -164,10 +185,21 @@ CREATE TABLE `tbl_status_pengambilan` (
   `idPetugas` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `tbl_status_pengambilan`
+--
+
+INSERT INTO `tbl_status_pengambilan` (`idStatus`, `keterangan`, `tanggal`, `idUser`, `idPetugas`) VALUES
+(21, 'Sudah Diambil', '2023-12-11', 6, 14),
+(22, 'Belum Diambil', '2023-12-14', 6, 15),
+(23, 'Belum Diambil', '2023-12-14', 10, 15),
+(25, 'Belum Diambil', '2023-12-14', 8, 15),
+(26, 'Belum Diambil', '2023-12-18', 8, 14);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_user`
+-- Struktur dari tabel `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -183,30 +215,33 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_user`
+-- Dumping data untuk tabel `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`idUser`, `name`, `userName`, `password`, `alamat`, `saldoMasuk`, `saldoKeluar`, `totalSaldo`, `statusAktif`) VALUES
-(5, 'User', 'user@gmail.com', '$2y$10$kHqj/sN51w2Njuwj.AYGYuc.SXAEIT8yoSyb.q2EgBjEGtnWz9LJS', 'Jogja', 50000, 10000, 40000, 'Y');
+(6, 'Alfian Iqbal Ramadhan', 'alfian@gmail.com', '$2y$10$vk9hFpWgCiC0BGJK9fmHeOb6hnaJSU/ygA6j.gtXH3lWILT9yyzDi', 'Magelang', 135000, 0, 135000, 'Y'),
+(8, 'Naufal Rafif Wirasena', 'naufal@gmail.com', '$2y$10$VhlMn7EIqXwXUgkGMu7a.eUDBC6NQcO9tv5rspPNo1K9oXi5Wtxn6', 'Sleman', 105000, 0, 105000, 'Y'),
+(9, 'Gatot Subroto', 'gatot@gmail.com', '$2y$10$iim/jl2OTqxX5cB95TAg.untVsANh1UkigccSoPP9UQq6x8m/iT9O', 'Sleman', 87500, 0, 87500, 'Y'),
+(10, 'Fulan Al-Kazab', 'fulan@gmail.com', '$2y$10$Ns.59nHVOXP2tDMqXWi3VeAXoenS7uMm/NK6BGeDiNbf/rGXkXhPq', 'Sleman', 75000, 0, 75000, 'N');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tbl_admin`
+-- Indeks untuk tabel `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`idAdmin`);
 
 --
--- Indexes for table `tbl_barang`
+-- Indeks untuk tabel `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
   ADD PRIMARY KEY (`idBarang`);
 
 --
--- Indexes for table `tbl_daur_ulang`
+-- Indeks untuk tabel `tbl_daur_ulang`
 --
 ALTER TABLE `tbl_daur_ulang`
   ADD PRIMARY KEY (`idDaur`),
@@ -215,7 +250,7 @@ ALTER TABLE `tbl_daur_ulang`
   ADD KEY `idUser` (`idUser`) USING BTREE;
 
 --
--- Indexes for table `tbl_iuran_wajib`
+-- Indeks untuk tabel `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
   ADD PRIMARY KEY (`idIuran`),
@@ -223,20 +258,20 @@ ALTER TABLE `tbl_iuran_wajib`
   ADD KEY `idPetugas` (`idPetugas`);
 
 --
--- Indexes for table `tbl_petugas`
+-- Indeks untuk tabel `tbl_petugas`
 --
 ALTER TABLE `tbl_petugas`
   ADD PRIMARY KEY (`idPetugas`);
 
 --
--- Indexes for table `tbl_riwayat_transaksi`
+-- Indeks untuk tabel `tbl_riwayat_transaksi`
 --
 ALTER TABLE `tbl_riwayat_transaksi`
   ADD PRIMARY KEY (`idTransaksi`),
   ADD KEY `fk_user_id` (`idUser`);
 
 --
--- Indexes for table `tbl_status_pengambilan`
+-- Indeks untuk tabel `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
   ADD PRIMARY KEY (`idStatus`),
@@ -244,69 +279,69 @@ ALTER TABLE `tbl_status_pengambilan`
   ADD KEY `idPetugas` (`idPetugas`) USING BTREE;
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_admin`
+-- AUTO_INCREMENT untuk tabel `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `idAdmin` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idAdmin` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tbl_barang`
+-- AUTO_INCREMENT untuk tabel `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  MODIFY `idBarang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idBarang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tbl_daur_ulang`
+-- AUTO_INCREMENT untuk tabel `tbl_daur_ulang`
 --
 ALTER TABLE `tbl_daur_ulang`
-  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idDaur` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `tbl_iuran_wajib`
+-- AUTO_INCREMENT untuk tabel `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
-  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idIuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `tbl_petugas`
+-- AUTO_INCREMENT untuk tabel `tbl_petugas`
 --
 ALTER TABLE `tbl_petugas`
-  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idPetugas` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tbl_riwayat_transaksi`
+-- AUTO_INCREMENT untuk tabel `tbl_riwayat_transaksi`
 --
 ALTER TABLE `tbl_riwayat_transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `tbl_status_pengambilan`
+-- AUTO_INCREMENT untuk tabel `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
-  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idStatus` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUser` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tbl_daur_ulang`
+-- Ketidakleluasaan untuk tabel `tbl_daur_ulang`
 --
 ALTER TABLE `tbl_daur_ulang`
   ADD CONSTRAINT `tbl_daur_ulang_ibfk_1` FOREIGN KEY (`idPetugas`) REFERENCES `tbl_petugas` (`idPetugas`) ON DELETE CASCADE ON UPDATE NO ACTION,
@@ -314,20 +349,20 @@ ALTER TABLE `tbl_daur_ulang`
   ADD CONSTRAINT `tbl_daur_ulang_ibfk_3` FOREIGN KEY (`idBarang`) REFERENCES `tbl_barang` (`idBarang`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tbl_iuran_wajib`
+-- Ketidakleluasaan untuk tabel `tbl_iuran_wajib`
 --
 ALTER TABLE `tbl_iuran_wajib`
   ADD CONSTRAINT `tbl_iuran_wajib_ibfk_1` FOREIGN KEY (`idPetugas`) REFERENCES `tbl_petugas` (`idPetugas`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `tbl_iuran_wajib_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `tbl_user` (`idUser`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tbl_riwayat_transaksi`
+-- Ketidakleluasaan untuk tabel `tbl_riwayat_transaksi`
 --
 ALTER TABLE `tbl_riwayat_transaksi`
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`idUser`) REFERENCES `tbl_user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_status_pengambilan`
+-- Ketidakleluasaan untuk tabel `tbl_status_pengambilan`
 --
 ALTER TABLE `tbl_status_pengambilan`
   ADD CONSTRAINT `tbl_status_pengambilan_ibfk_1` FOREIGN KEY (`idPetugas`) REFERENCES `tbl_petugas` (`idPetugas`) ON DELETE CASCADE ON UPDATE NO ACTION,

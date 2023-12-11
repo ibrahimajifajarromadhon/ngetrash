@@ -75,6 +75,91 @@ class Admin extends CI_Controller{
 		$this->session->sess_destroy();
 		redirect('admin/login');
 	}
+
+	public function laporan_petugas(){
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+        $data['data_petugas']=$this->Madmin->get_all_data('tbl_petugas')->result();
+
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
+		$this->load->view('laporan/laporan_petugas', $data);
+		$this->load->view('admin/layout/footer');	
+	}
+
+	function print_petugas() {	
+		
+        $data['data_petugas']=$this->Madmin->get_all_data('tbl_petugas')->result();
+
+		$this->load->view('print/petugas', $data);
+	}
+
+	public function laporan_user(){
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+        $data['data_user']=$this->Madmin->get_all_data('tbl_user')->result();
+
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
+		$this->load->view('laporan/laporan_user', $data);
+		$this->load->view('admin/layout/footer');	
+	}
+
+	function print_user() {	
+		
+        $data['data_user']=$this->Madmin->get_all_data('tbl_user')->result();
+
+		$this->load->view('print/user', $data);
+	}
+	public function laporan_iuran(){
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+        $data['data_iuran']=$this->Madmin->get_all_data('tbl_iuran_wajib')->result();
+
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
+		$this->load->view('laporan/laporan_iuran', $data);
+		$this->load->view('admin/layout/footer');	
+	}
+
+	function print_iuran() {	
+		
+        $data['data_iuran']=$this->Madmin->get_all_data('tbl_iuran_wajib')->result();
+
+		$this->load->view('print/iuran', $data);
+	}
+
+	public function laporan_status(){
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+        $data['data_status']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
+
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
+		$this->load->view('laporan/laporan_status', $data);
+		$this->load->view('admin/layout/footer');	
+	}
+
+	function print_status() {	
+		
+        $data['data_status']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
+
+		$this->load->view('print/status', $data);
+	}
+
+	public function laporan_daur(){
+		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
+        $data['data_daur']=$this->Madmin->get_all_data('tbl_daur_ulang')->result();
+
+		$this->load->view('admin/layout/header', $data);
+		$this->load->view('admin/layout/menu', $data);
+		$this->load->view('laporan/laporan_daur', $data);
+		$this->load->view('admin/layout/footer');	
+	}
+
+	function print_daur() {	
+		
+        $data['data_daur']=$this->Madmin->get_all_data('tbl_daur_ulang')->result();
+
+		$this->load->view('print/daur', $data);
+	}
 }
+
 
 ?>
