@@ -14,20 +14,6 @@ class Madmin extends CI_Model{
         $this->db->insert('tbl_petugas', $data);
     }
 
-	public function create_admin($n, $u, $p){
-		$is_username_exist =($this->db->get_where('tbl_admin', array('name' => $n)));
-		if(!$is_username_exist){
-			$data = array(
-				'name' => $n,
-				'userName' => $u,
-				'password' => password_hash($p, PASSWORD_DEFAULT)
-			);
-			$this->db->insert('tbl_admin', $data);
-			return true;
-		}
-		return false;
-	}
-
 	public function cek_login_admin($u, $p){
 		$query = $this->db->get_where('tbl_admin', array('userName' => $u ));
 		$check = $query->num_rows();
