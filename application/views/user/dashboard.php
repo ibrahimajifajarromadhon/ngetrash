@@ -2,10 +2,10 @@
   <section id="hero">
     <div class="hero container py-5 my-5">
       <div class="row flex-lg-row-reverse align-items-center g-5 mt-2 py-5">
-        <div class="col-10 col-sm-4 col-lg-5 py-md-5 my-md-5">
+        <div class="col-10 col-sm-4 col-lg-5 py-md-5 my-md-5" data-aos="fade-left">
           <img src="<?php echo base_url('assets/img/truk.png'); ?>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100%" height="100%" loading="lazy">
         </div>
-        <div class="col-lg-7 col-sm-8 py-md-5 my-md-5">
+        <div class="col-lg-7 col-sm-8 py-md-5 my-md-5" data-aos="fade-right">
           <h1 class=" lh-1 mb-3">Peduli Sampah untuk Lingkungan yang Lebih Sehat.</h1>
           <ul class="list-unstyled my-5">
             <li class="my-2">
@@ -29,10 +29,10 @@
   </section>
 
   <!-- Feature Section Starts -->
-  <section id="calender">
+  <section id="calender" data-aos="fade-up">
     <div class="container">
       <div class="row">
-        <h1 class="mb-5 text-center">Jadwal Pengambilan Sampah</h1>
+        <h1 class="mb-5 text-center" data-aos="fade-up">Jadwal Pengambilan Sampah</h1>
         <div class="row">
           <div class="col-md-12">
             <div id='calendar'></div>
@@ -45,9 +45,9 @@
   <!-- Services Section Starts -->
   <section id="services" class="my-5">
     <div class="container ">
-      <h1 class="text-center my-5">Jenis-Jenis Sampah</h1>
+      <h1 class="text-center my-5" data-aos="fade-up">Jenis-Jenis Sampah</h1>
       <div class="row py-1">
-        <div class="col-md-3 mt-2">
+        <div class="col-md-3 mt-2" data-aos="fade-up">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/organik.png'); ?>" style="width: 150px; height: 200px;" alt="">
@@ -72,7 +72,7 @@
             <h2 class="text-center" style="font-weight: 700; color: green;">Rp. 10.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3 mt-2">
+        <div class="col-md-3 mt-2" data-aos="fade-up">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/plastik.png'); ?>" style="width: 150px; height: 200px;" alt="">
@@ -93,7 +93,7 @@
             <h2 class="text-center" style="font-weight: 700; color: red;">Rp. 15.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3 mt-2">
+        <div class="col-md-3 mt-2" data-aos="fade-up">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/kertas.png'); ?>" style="width: 150px; height: 200px;" alt="">
@@ -116,7 +116,7 @@
             <h2 class="text-center" style="font-weight: 700; color: orange;">Rp. 5.000/kg</h2>
           </div>
         </div>
-        <div class="col-md-3 mt-2">
+        <div class="col-md-3 mt-2" data-aos="fade-up">
           <div class="service-post py-5 px-5">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
               <img src="<?php echo base_url('assets/img/besi.png'); ?>" style="width: 150px; height: 200px;" alt="">
@@ -148,9 +148,9 @@
 
   <section id="pricing" class="pricing-content section-padding mb-5">
     <div class="container">
-      <h1 class="text-center my-5">Harga Iuran Wajib</h1>
+      <h1 class="text-center my-5" data-aos="fade-up">Harga Iuran Wajib</h1>
       <div class="row text-center">
-        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;" data-aos="zoom-in-up">
           <div class="pricing_design">
             <div class="single-pricing">
               <div class="price-head">
@@ -160,7 +160,7 @@
             </div>
           </div>
         </div><!--- END COL -->
-        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;" data-aos="zoom-in-up">
           <div class="pricing_design">
             <div class="single-pricing">
               <div class="price-head">
@@ -170,7 +170,7 @@
             </div>
           </div>
         </div><!--- END COL -->
-        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+        <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-2" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;" data-aos="zoom-in-up">
           <div class="pricing_design">
             <div class="single-pricing">
               <div class="price-head">
