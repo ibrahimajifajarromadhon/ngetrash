@@ -23,7 +23,7 @@ class PetugasStatus extends CI_Controller{
 
 	public function add(){
         if(empty($this->session->userdata('Petugas'))){
-            redirect('petugasstatus');
+            redirect('PetugasStatus');
         }
         $data['user']=$this->Madmin->get_all_data('tbl_user')->result();
         $data['petugas'] = $this->Madmin->get_by_id('tbl_petugas', array('idPetugas' => $this->session->userdata('idPetugas')))->row();
@@ -36,7 +36,7 @@ class PetugasStatus extends CI_Controller{
 
     public function save(){
         if(empty($this->session->userdata('Petugas'))){
-            redirect('petugasstatus');
+            redirect('PetugasStatus');
         }
             $id_u = $this->input->post('idUser');
             $id_p = $this->input->post('idPetugas');

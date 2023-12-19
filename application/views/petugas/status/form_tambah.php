@@ -33,7 +33,7 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/save'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('PetugasStatus/save'); ?>" enctype="multipart/form-data">
                                                 <div class="control-group">
                                                     <label for="idUser">Nama User</label>
                                                     <select class="form-control" name="idUser">
