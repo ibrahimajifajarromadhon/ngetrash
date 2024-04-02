@@ -53,7 +53,7 @@ class Madmin extends CI_Model{
 	}
 
 	public function cek_login_user($u, $p){
-		$query = $this->db->get_where('tbl_user', array('userName' => $u,'statusAktif' => 'Y' ));
+		$query = $this->db->get_where('tbl_user', array('userName' => $u, 'statusAktif' => 'Y' ));
 		$check = $query->num_rows();
 		$account = $query->row_object();
 		$hash = $account->password;
@@ -74,6 +74,15 @@ class Madmin extends CI_Model{
 	public function get_all_data($tabel){
 		$q=$this->db->get($tabel);
 		return $q;
+	}
+
+	public function count_all_data($table) {
+		return $this->db->count_all($table);
+	}
+
+	public function get_data_paginated($table, $limit, $offset) {
+		$this->db->limit($limit, $offset);
+		return $this->db->get($table);
 	}
 
 	public function get_by_id($tabel, $id){
@@ -164,5 +173,23 @@ class Madmin extends CI_Model{
         return $this->db->get('tbl_petugas')->result();
     }
 
+	public function getTotalDaurUlang($id){
+		$this->db->select('total');
+		$this->db->where('idDaur', $id);
+		$query = $this->db->get('tbl_daur_ulang');
+		$result = $query->row();
+		
+		if ($result) {
+			return $result->total;
+		} else {
+			return 0; 
+		}
+	}
+
+	public function getSaldoUser($id_u) {
+        $query = $this->db->get_where('tbl_user', array('idUser' => $id_u));
+        $user = $query->row_array();
+        return $user['totalSaldo'];
+    }
 }
 ?>

@@ -28,8 +28,14 @@
                                         <div class="card-header">
                                             <h3 class="card-title">Data Iuran Wajib</h3>
                                         </div>
-                                        <div class="pl-2 pt-3">
-                                            <a href="<?php echo site_url('petugasiuran/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Iuran </b></a>
+                                        <?php if ($this->session->flashdata('success')) : ?>
+                                            <div class="ml-2 mr-2 mt-2 mb-0 alert alert-success alert-dismissible text-whitesmoke">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <strong><?php echo $this->session->flashdata('success'); ?></strong>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="pl-2 pt-2">
+                                            <a href="<?php echo site_url('petugas_iuran/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Iuran </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -50,7 +56,7 @@
                                                         <?php $no = 1;
                                                         foreach ($iuran as $i) { ?>
                                                     <tr>
-                                                        <td><?php echo $no; ?></td>
+                                                        <th><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
                                                             $user_id = $i->idUser;
@@ -59,8 +65,8 @@
                                                             ?>
                                                         </td>
                                                         <td><?php echo $i->tanggal; ?></td>
-                                                        <td><b style="background-color: <?php echo ($i->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->jenisBayar; ?></b></td>
-                                                        <td><b style="background-color: <?php echo ($i->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $i->status; ?></b></td>
+                                                        <td><b style="background-color: <?php echo ($i->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $i->jenisBayar; ?></b></td>
+                                                        <td><b style="background-color: <?php echo ($i->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $i->status; ?></b></td>
                                                         <td>
                                                             <?php
                                                             $petugas_id = $i->idPetugas;
@@ -70,8 +76,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasiuran/get_by_id/' . $i->idIuran); ?>" class="btn btn-warning">Ubah Iuran</a>
-                                                                <a href="<?php echo site_url('petugasiuran/delete/' . $i->idIuran); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
+                                                                <a href="<?php echo site_url('petugas_iuran/get_by_id/' . $i->idIuran); ?>" class="btn btn-warning">Ubah Iuran</a>
+                                                                <a href="<?php echo site_url('petugas_iuran/delete/' . $i->idIuran); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini?')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -83,12 +89,24 @@
 
                                         <!-- /.card-body -->
                                         <div class="card-footer clearfix">
-                                            <ul class="pagination pagination-sm m-0 float-right">
-                                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                            <ul class="pagination pagination-sm m-0 justify-content-end">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<?php echo site_url('petugas_iuran/page/' . $links['prev_page']); ?>" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+
+                                                <?php for ($i = 1; $i <= $links['num_pages']; $i++) : ?>
+                                                    <li class="page-item <?php echo ($i == $links['current_page']) ? 'active' : ''; ?>">
+                                                        <a class="page-link" href="<?php echo site_url('petugas_iuran/page/' . $i); ?>"><?php echo $i; ?></a>
+                                                    </li>
+                                                <?php endfor; ?>
+
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<?php echo site_url('petugas_iuran/page/' . $links['next_page']); ?>" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

@@ -3,7 +3,7 @@
     <div class="hero container py-5 my-5">
       <div class="row flex-lg-row-reverse align-items-center g-5 mt-2 py-5">
         <div class="col-10 col-sm-4 col-lg-5 py-md-5 my-md-5" data-aos="fade-left">
-          <img src="<?php echo base_url('assets/img/truk.png'); ?>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100%" height="100%" loading="lazy">
+          <img src="<?php echo base_url('assets/img/truk.png'); ?>" class="d-block mx-lg-auto img-fluid" style="filter: drop-shadow(15px 5px 5px orange);" alt="Bootstrap Themes" width="100%" height="100%" loading="lazy">
         </div>
         <div class="col-lg-7 col-sm-8 py-md-5 my-md-5" data-aos="fade-right">
           <h1 class=" lh-1 mb-3">Peduli Sampah untuk Lingkungan yang Lebih Sehat.</h1>

@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mt-2">
                                             <div class="form-group">
-                                                <a target="blank" href="<?php echo site_url('Admin/print_petugas/'); ?>" class="btn btn-success btn-block rounded-0 shadow-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+                                                <a target="blank" href="<?php echo site_url('admin_print/print_petugas'); ?>" class="btn btn-success btn-block rounded-0 shadow-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                         <tbody>
                                             <tr>
                                                 <?php $no = 1;
-                                                foreach ($data_petugas as $p) { ?>
+                                                foreach ($petugas as $p) { ?>
                                             <tr>
                                                 <th><?php echo $no ?></th>
                                                 <td><?php echo $p->name ?></td>
@@ -65,18 +65,30 @@
                                             </tr>
                                         <?php $no++;
                                                 } ?>
-                                            </tr>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    <ul class="pagination pagination-sm m-0 justify-content-end">
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo site_url('admin_print/laporan_petugas/page/' . $links['prev_page']); ?>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+
+                                        <?php for ($i = 1; $i <= $links['num_pages']; $i++) : ?>
+                                            <li class="page-item <?php echo ($i == $links['current_page']) ? 'active' : ''; ?>">
+                                                <a class="page-link" href="<?php echo site_url('admin_print/laporan_petugas/page/' . $i); ?>"><?php echo $i; ?></a>
+                                            </li>
+                                        <?php endfor; ?>
+
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo site_url('admin_print/laporan_petugas/page/' . $links['next_page']); ?>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

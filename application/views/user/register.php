@@ -20,12 +20,16 @@
         }
 
         body {
-            height: 100vmin;
+            background-size: 100% 100%;            
             background: linear-gradient(to top, #c9c9ff 30%, #3ac5ce 90%) no-repeat
         }
 
         .container {
             margin: 50px auto
+        }
+
+        .alert {
+            font-size: 0.8em;
         }
 
         .panel-heading {
@@ -134,38 +138,62 @@
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
     <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
-    
+
 
 </head>
 
-<body >
+<body>
     <div class="container">
         <div class="row">
             <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
                 <div class="panel border bg-white mt-1 mt-md-1">
-                    <div class="panel-heading" >
+                    <div class="panel-heading">
                         <h3 class="pt-3 font-weight-bold">Register User</h3>
                     </div>
                     <div class="panel-body p-3 mb-5">
-                        <form action="<?php echo site_url('user/register'); ?>" method="POST">
+                        <form action="<?php echo site_url('user/register_aksi'); ?>" method="POST">
+                            <?php if ($this->session->flashdata('error_name')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_name'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2">
-                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" id="name" name="name" placeholder="Enter your Name" required=""> </div>
+                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" id="name" name="name" placeholder="Enter your name" value="<?php echo $this->session->flashdata('input_name') ?>" required> </div>
                             </div>
+                            <?php if ($this->session->flashdata('error_userName')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_userName'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2">
-                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" id="userName" name="userName"placeholder="Enter your Username" required=""> </div>
+                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" id="userName" name="userName" placeholder="Enter your username" value="<?php echo $this->session->flashdata('input_userName') ?>" required> </div>
                             </div>
+                            <?php if ($this->session->flashdata('error_password')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_password'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2 pb-2">
-                                <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" id="password" name="password"placeholder="Enter your Password" required=""> </div>
+                                <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" id="password" name="password" placeholder="Enter your password" value="<?php echo $this->session->flashdata('input_password') ?>" required> </div>
                             </div>
+                            <?php if ($this->session->flashdata('error_alamat')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_alamat'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2">
-                                <div class="input-field"> <i class="fas fa-map-marker-alt p-2"></i><textarea id="alamat" name="alamat" class="form-control border-0" placeholder="Enter your Alamat" required=""></textarea> </div>
+                                <div class="input-field"> <i class="fas fa-map-marker-alt p-2"></i><textarea id="alamat" name="alamat" class="form-control border-0" placeholder="Enter your address" required><?php echo $this->session->flashdata('input_alamat') ?></textarea> </div>
                             </div>
-                            <input type="hidden" id="saldoMasuk" name="saldoMasuk" value="0"> 
+                            <input type="hidden" id="saldoMasuk" name="saldoMasuk" value="0">
                             <input type="hidden" id="saldoKeluar" name="saldoKeluar" value="0">
                             <input type="hidden" id="totalSaldo" name="totalSaldo" value="0">
                             <input type="hidden" id="statusAktif" name="statusAktif" value="N">
                             <button class="btn btn-block mt-3" type="submit">Register</button>
-                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="<?php echo site_url('user/login');?>">Login</a> </div>
+                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="<?php echo site_url('user/login'); ?>">Login</a> </div>
                         </form>
                         <i class=""></i>
                     </div>

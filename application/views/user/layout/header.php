@@ -24,6 +24,17 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
   <style>
+    .fc-daygrid-event .fc-event-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      overflow: hidden;
+      font-weight: 800;
+      font-size: medium;
+    }
+
     .pricing-content {
       position: relative;
     }
@@ -55,8 +66,6 @@
       z-index: -1;
     }
 
-    .price-head {}
-
     .price-head h2 {
       margin-bottom: 20px;
       font-size: 26px;
@@ -68,8 +77,6 @@
       margin-top: 30px;
       margin-bottom: 5px;
     }
-
-    .price-head span {}
 
     .single-pricing ul {
       list-style: none;
@@ -91,8 +98,6 @@
       line-height: 20px;
       margin-right: 6px;
     }
-
-    .pricing-price {}
 
     .price_btn {
       background: #554c86;
@@ -133,66 +138,7 @@
   <!-- script ================================================== -->
   <script src="<?php echo base_url('assets/user/js/modernizr.js'); ?>"></script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        events: [{
-            title: 'Pembayaran',
-            start: '2023-12-03',
-            color: '#FF4500'
-          },
-          {
-            title: 'Pembayaran',
-            start: '2023-12-10',
-            color: '#FF4500'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-04',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-11',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-18',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-25',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-07',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-14',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-21',
-            color: '#32CD32'
-          },
-          {
-            title: 'Pengambilan',
-            start: '2023-12-28',
-            color: '#32CD32'
-          },
-        ]
-      });
-      calendar.render();
-    });
-  </script>
+
 
 </head>
 
@@ -243,12 +189,12 @@
                   </a>
                 </li>
                 <li class="nav-list mx-3">
-                  <a href="<?php echo site_url('userstatus'); ?>" class="nav-link px-2">
+                  <a href="<?php echo site_url('user/status'); ?>" class="nav-link px-2">
                     <h5> Status </h5>
                   </a>
                 </li>
                 <li class="nav-list mx-3">
-                  <a href="<?php echo site_url('userriwayat'); ?>" class="nav-link px-2">
+                  <a href="<?php echo site_url('user/riwayat'); ?>" class="nav-link px-2">
                     <h5> Riwayat </h5>
                   </a>
                 </li>
@@ -309,3 +255,41 @@
     </nav>
 
   </section>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var currentYear = new Date().getFullYear();
+      var currentMonth = new Date().getMonth() + 1;
+
+      function generateEvents(year, month) {
+        var events = [];
+        var daysInMonth = new Date(year, month, 0).getDate();
+        for (var i = 1; i <= daysInMonth; i++) {
+          var start = year + '-' + (month < 10 ? '0' : '') + month + '-' + (i < 10 ? '0' : '') + i;
+          var eventTitle = '';
+          var eventColor = '';
+          if (i === 1 || i === 10) {
+            eventTitle = 'Pembayaran';
+            eventColor = '#FF4500';
+          } else if (i === 4 || i === 7 || i === 11 || i === 14 || i === 18 || i === 21 || i === 25 || i === 28) {
+            eventTitle = 'Pengambilan';
+            eventColor = '#32CD32';
+          }
+          if (eventTitle !== '') {
+            events.push({
+              title: eventTitle,
+              start: start,
+              color: eventColor
+            });
+          }
+        }
+        return events;
+      }
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: generateEvents(currentYear, currentMonth)
+      });
+      calendar.render();
+    });
+  </script>

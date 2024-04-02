@@ -27,6 +27,25 @@ class Petugas extends CI_Controller{
 	public function login_aksi(){
 		$this->load->model('Madmin');
 
+		$this->form_validation->set_rules('userName', 'Username', 'required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|max_length[255]');
+
+		if ($this->form_validation->run() == FALSE) {
+            $error_userName = form_error('userName');
+            $error_password = form_error('password');
+
+            $input_userName = $this->input->post('userName');
+            $input_password = $this->input->post('password');
+
+            $this->session->set_flashdata('error_userName', $error_userName);
+            $this->session->set_flashdata('error_password', $error_password);
+
+            $this->session->set_flashdata('input_userName', $input_userName);
+            $this->session->set_flashdata('input_password', $input_password);
+
+            redirect('petugas/login');
+        }
+
 		$u = $this->input->post('userName');
 		$p = $this->input->post('password');
 
@@ -40,18 +59,47 @@ class Petugas extends CI_Controller{
 			);
 
 			$this->session->set_userdata($data_session);
-			redirect('petugas');
+			redirect('petugas_iuran');
 		} else {
-			redirect('petugas');
+			$this->session->set_flashdata('error', 'Your username or password is incorrect!');
+			
+			$input_userName = $this->input->post('userName');
+            $input_password = $this->input->post('password');
+
+            $this->session->set_flashdata('input_userName', $input_userName);
+            $this->session->set_flashdata('input_password', $input_password);
+
+			redirect('petugas/login');
 		}
 	}
 
 	public function register(){
-		$this->form_validation->set_rules('userName', 'Username', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Username Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-        $this->form_validation->set_rules('password', 'Password', 'required', array('required'=>'<div class="alert alert-danger alert-dismissible fade show"><strong>Error! </strong>Password Tidak Boleh Kosong! <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>'));
-		
+		$this->load->view('petugas/register');
+	}
+
+	public function register_aksi(){
+		$this->form_validation->set_rules('name', 'Nama', 'required|min_length[5]|max_length[255]');
+		$this->form_validation->set_rules('userName', 'Username', 'required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|max_length[255]');
+
 		if ($this->form_validation->run() == FALSE) {
-            $this->load->view('petugas/register');
+            $error_name = form_error('name');
+            $error_userName = form_error('userName');
+            $error_password = form_error('password');
+
+            $input_name= $this->input->post('name');
+            $input_userName = $this->input->post('userName');
+            $input_password = $this->input->post('password');
+
+            $this->session->set_flashdata('error_name', $error_name);
+            $this->session->set_flashdata('error_userName', $error_userName);
+            $this->session->set_flashdata('error_password', $error_password);
+
+            $this->session->set_flashdata('input_name', $input_name);
+            $this->session->set_flashdata('input_userName', $input_userName);
+            $this->session->set_flashdata('input_password', $input_password);
+
+            redirect('petugas/register');
         } else{
 			$n = $this->input->post('name');
 			$u = $this->input->post('userName');
@@ -67,8 +115,9 @@ class Petugas extends CI_Controller{
             );
             
             $this->Madmin->save_petugas($petugas_data);
-            
-            redirect('petugas');
+			$this->session->set_flashdata('success', 'Register petugas berhasil!');
+
+            redirect('petugas/login');
 		}
 	}
 

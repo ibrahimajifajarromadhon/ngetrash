@@ -5,7 +5,7 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" type="image/png" href="<?php echo base_url('assets/img/logo.png'); ?>">
-    
+
     <title>NgeTrash - Login User</title>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
@@ -22,6 +22,10 @@
         body {
             height: 100vmin;
             background: linear-gradient(to top, #c9c9ff 30%, #3ac5ce 90%) no-repeat
+        }
+
+        .alert {
+            font-size: 0.8em;
         }
 
         .container {
@@ -49,7 +53,7 @@
             background-color: #3ac5ce;
             color: white;
         }
-        
+
         .far {
             color: #3ac5ce;
         }
@@ -134,27 +138,48 @@
     <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
 </head>
 
-<body >
+<body>
     <div class="container">
         <div class="row">
             <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
                 <div class="panel border bg-white mt-5 mt-md-5">
-                    <div class="panel-heading" >
+                    <div class="panel-heading">
                         <h3 class="pt-3 font-weight-bold">Login User</h3>
-                        <?php if(isset($error_message)) { ?> 
-              <?php echo $error_message; ?>
-            <?php } ?>
                     </div>
                     <div class="panel-body p-3">
                         <form action="<?php echo site_url('user/login_aksi'); ?>" method="POST">
+                            <?php if ($this->session->flashdata('success')) : ?>
+                                <div class="pb-3 pt-3 alert alert-success alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px; margin-top:3px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('success'); ?></strong>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($this->session->flashdata('error')) : ?>
+                                <div class="pb-3 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px; margin-top:3px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error'); ?></strong>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($this->session->flashdata('error_userName')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_userName'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2">
-                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" type="text" id="userName" name="userName" placeholder="Username or Email" required> </div>
+                                <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" id="userName" name="userName" placeholder="Enter your username" value="<?php echo $this->session->flashdata('input_userName') ?>" required> </div>
                             </div>
+                            <?php if ($this->session->flashdata('error_password')) : ?>
+                                <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size:2em; margin-right: 0px;">&times;</a>
+                                    <strong><?php echo $this->session->flashdata('error_password'); ?></strong>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group py-2 pb-2">
-                                <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" type="text" id="password" name="password" placeholder="Enter your Password" required> </div>
+                                <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" id="password" name="password" placeholder="Enter your password" value="<?php echo $this->session->flashdata('input_password') ?>" required> </div>
                             </div>
                             <button class="btn btn-block mt-3" type="submit">Login</button>
-                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="<?php echo site_url('user/register');?>">Register</a> </div>
+                            <div class="text-center pt-4 text-muted">Don't have an account? <a href="<?php echo site_url('user/register'); ?>">Register</a> </div>
                         </form>
                     </div>
                 </div>

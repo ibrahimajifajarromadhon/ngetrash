@@ -28,8 +28,14 @@
                                         <div class="card-header">
                                             <h3 class="card-title">Data Daur Ulang</h3>
                                         </div>
-                                        <div class="pl-2 pt-3">
-                                        <a href="<?php echo site_url('petugasdaur/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Daur Ulang </b></a>
+                                        <?php if ($this->session->flashdata('success')) : ?>
+                                            <div class="ml-2 mr-2 mt-2 mb-0 alert alert-success alert-dismissible text-whitesmoke">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <strong><?php echo $this->session->flashdata('success'); ?></strong>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="pl-2 pt-2">
+                                        <a href="<?php echo site_url('petugas_daur/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Daur Ulang </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -51,7 +57,7 @@
                                                         <?php $no = 1;
                                                         foreach ($daur as $d) { ?>
                                                     <tr>
-                                                        <td><?php echo $no; ?></td>
+                                                        <th><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
                                                                 $user_id = $d->idUser;
@@ -78,8 +84,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugasdaur/get_by_id/' . $d->idDaur); ?>" class="btn btn-warning">Ubah Iuran</a>
-                                                                <a href="<?php echo site_url('petugasdaur/delete/' . $d->idDaur); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
+                                                                <a href="<?php echo site_url('petugas_daur/get_by_id/' . $d->idDaur); ?>" class="btn btn-warning">Ubah Daur</a>
+                                                                <a href="<?php echo site_url('petugas_daur/delete/' . $d->idDaur); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini?')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -91,12 +97,24 @@
                                         
                                         <!-- /.card-body -->
                                         <div class="card-footer clearfix">
-                                            <ul class="pagination pagination-sm m-0 float-right">
-                                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                            <ul class="pagination pagination-sm m-0 justify-content-end">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<?php echo site_url('petugas_daur/page/' . $links['prev_page']); ?>" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+
+                                                <?php for ($i = 1; $i <= $links['num_pages']; $i++) : ?>
+                                                    <li class="page-item <?php echo ($i == $links['current_page']) ? 'active' : ''; ?>">
+                                                        <a class="page-link" href="<?php echo site_url('petugas_daur/page/' . $i); ?>"><?php echo $i; ?></a>
+                                                    </li>
+                                                <?php endfor; ?>
+
+                                                <li class="page-item">
+                                                    <a class="page-link" href="<?php echo site_url('petugas_daur/page/' . $links['next_page']); ?>" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

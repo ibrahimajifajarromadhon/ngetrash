@@ -1,7 +1,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo site_url('petugasiuran');?>" class="site_title"><img src=<?php echo base_url('assets/img/logo-brand.png'); ?> alt="..." style="width:45px; height: 45px;"> <span><b>NgeTrash</b></span></a>
+              <a href="<?php echo site_url('petugas_iuran'); ?>" class="site_title"><img src=<?php echo base_url('assets/img/logo-brand.png'); ?> alt="..." style="width:45px; height: 45px;"> <span><b>NgeTrash</b></span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -25,11 +25,14 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('petugasiuran');?>"><i class="fa fa-edit"></i> Iuran Wajib </a>
+                  <li <?php if ($this->uri->segment(1) == 'petugas_iuran') echo 'class="active"'; ?>>
+                    <a href="<?php echo site_url('petugas_iuran'); ?>"><i class="fa fa-edit"></i> Iuran Wajib </a>
                   </li>
-                  <li><a href="<?php echo site_url('petugasstatus');?>"><i class="fa fa-desktop"></i> Status Pengambilan </a>
+                  <li <?php if ($this->uri->segment(1) == 'petugas_status') echo 'class="active"'; ?>>
+                    <a href="<?php echo site_url('petugas_status'); ?>"><i class="fa fa-desktop"></i> Status Pengambilan </a>
                   </li>
-                  <li><a href="<?php echo site_url('petugasdaur');?>"><i class="fa fa-table"></i> Daur Ulang </a>
+                  <li <?php if ($this->uri->segment(1) == 'petugas_daur') echo 'class="active"'; ?>>
+                    <a href="<?php echo site_url('petugas_daur'); ?>"><i class="fa fa-table"></i> Daur Ulang </a>
                   </li>
                 </ul>
               </div>

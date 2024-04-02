@@ -33,22 +33,19 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasdaur/edit'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugas_daur/edit'); ?>" enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?php echo $daur->idDaur; ?>">
-                                                <div class="control-group">
-                                                    <label for="idUser">Nama User</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idUser" class="font-weight-bold">Nama User</label>
                                                     <input type="hidden" name="idUser" value="<?php echo $daur->idUser; ?>">
-                                                    <input class="form-control" value=<?php
-                                                            $user_id = $daur->idUser;
-                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
-                                                            echo $user->name;
-                                                            $idUser=$user->name;
-                                                            ?> disabled>
-                                                    </input>
-                                                    <p class="help-block text-danger"></p>
+                                                    <?php
+                                                    $user_id = $daur->idUser;
+                                                    $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                    ?>
+                                                    <input class="form-control" value="<?php echo $user->name; ?>" disabled>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="idPetugas">Nama Petugas</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idPetugas" class="font-weight-bold">Nama Petugas</label>
                                                     <input type="hidden" name="idPetugas" value="<?php echo $daur->idPetugas; ?>">
                                                     <input class="form-control" value=<?php
                                                             $petugas_id = $daur->idPetugas;
@@ -56,10 +53,9 @@
                                                             echo $petugas->name;
                                                             ?> disabled>
                                                     </input>
-                                                    <p class="help-block text-danger"></p>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="tanggal">Tanggal</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="tanggal" class="font-weight-bold">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="hidden" name="tanggal" value="<?php echo $daur->tanggal; ?>">
                                                         <input type="date" class="form-control" name="idDaur" value=<?php
@@ -70,22 +66,21 @@
                                                         </input>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                <label for="barang">Barang</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="barang" class="font-weight-bold">Barang</label>
                                                     <select class="form-control" name="idBarang">
-                                                        <?php foreach($barang as $b){?>
-                                                            <option selected value="<?php echo $b->idBarang; ?>" data-harga="<?php echo $b->harga; ?>"><?php echo $b->namaBarang;?></option>
-                                                        <?php } ?>
+                                                        <?php foreach($barang as $b): ?>
+                                                            <?php $selected = ($b->idBarang == $daur->idBarang) ? 'selected' : ''; ?>
+                                                            <option value="<?php echo $b->idBarang; ?>" data-harga="<?php echo $b->harga; ?>" <?php echo $selected; ?>><?php echo $b->namaBarang; ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
-                                                    <p class="help-block text-danger"></p>
-                                                </div> 
-                                                <div class="control-group">
-                                                    <label for="berat">Berat</label>
-                                                    <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat"/>
-                                                    <p class="help-block text-danger"><?php echo form_error('berat'); ?></p>
+                                                </div>
+                                                <div class="control-group mb-3">
+                                                    <label for="berat" class="font-weight-bold">Berat</label>
+                                                    <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat" value="<?php echo $daur->berat; ?>"/>
                                                 </div>   
-                                                <div class="control-group" name="total">
-                                                    <label for="total">Total: </label>
+                                                <div class="control-group mb-3" name="total">
+                                                    <label for="total" class="font-weight-bold">Total: </label>
                                                     <b><span id="total"></span></b>
                                                     <p class="help-block text-danger"></p>
                                                     <input type="hidden" name="totalResult" id="totalResult">
@@ -99,15 +94,6 @@
                             </div>
 
                             <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

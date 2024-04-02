@@ -33,21 +33,19 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasstatus/edit'); ?>" >
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugas_status/edit'); ?>" >
                                                 <input type="hidden" name="id" value="<?php echo $status->idStatus; ?>">
-                                                <div class="control-group">
-                                                    <label for="idUser">Nama User</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idUser" class="font-weight-bold">Nama User</label>
                                                     <input type="hidden" name="idUser" value="<?php echo $status->idUser; ?>">
-                                                    <input class="form-control" value=<?php
-                                                            $user_id = $status->idUser;
-                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
-                                                            echo $user->name;
-                                                            ?> disabled>
-                                                    </input>
-                                                    <p class="help-block text-danger"></p>
+                                                    <?php
+                                                    $user_id = $status->idUser;
+                                                    $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                    ?>
+                                                    <input class="form-control" value="<?php echo $user->name; ?>" disabled>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="idPetugas">Nama Petugas</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idPetugas" class="font-weight-bold">Nama Petugas</label>
                                                     <input type="hidden" name="idPetugas" value="<?php echo $status->idPetugas; ?>">
                                                     <input class="form-control" value=<?php
                                                             $petugas_id = $status->idPetugas;
@@ -55,10 +53,9 @@
                                                             echo $petugas->name;
                                                             ?> disabled>
                                                     </input>
-                                                    <p class="help-block text-danger"></p>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="tanggal">Tanggal</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="tanggal" class="font-weight-bold">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                     <input type="hidden" name="tanggal" value="<?php echo $status->tanggal; ?>">
                                                     <input type="date" class="form-control" value=<?php
@@ -72,13 +69,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="keterangan">Keterangan</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="keterangan" class="font-weight-bold">Keterangan</label>
                                                     <select class="form-control" name="keterangan">
-                                                        <option selected value="1">Belum diambil</option>
-                                                        <option value="2">Sudah diambil</option>
+                                                    <option disabled selected>Pilih keterangan</option>
+                                                        <option value="1" <?= ($status->keterangan == 'Belum Diambil') ? 'selected' : '' ?>>Belum Diambil</option>
+                                                        <option value="2" <?= ($status->keterangan == 'Sudah Diambil') ? 'selected' : '' ?>>Sudah Diambil</option>
                                                     </select>
-                                                    <p class="help-block text-danger"></p>
                                                 </div>
 
                                                 <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
@@ -89,15 +86,6 @@
                             </div>
 
                             <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

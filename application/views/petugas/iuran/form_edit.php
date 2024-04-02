@@ -33,22 +33,20 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasiuran/edit'); ?>">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugas_iuran/edit'); ?>">
                                                 <input type="hidden" name="id" value="<?php echo $iuran->idIuran; ?>">
-                                                <div class="control-group">
-                                                    <label for="idUser">Nama User</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idUser" class="font-weight-bold">Nama User</label>
                                                     <input type="hidden" name="idUser" value="<?php echo $iuran->idUser; ?>">
-                                                    <input class="form-control" value=<?php
-                                                            $user_id = $iuran->idUser;
-                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
-                                                            echo $user->name;
-                                                            $idUser=$user->name;
-                                                            ?> disabled>
-                                                    </input>
+                                                    <?php
+                                                    $user_id = $iuran->idUser;
+                                                    $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                    ?>
+                                                    <input class="form-control" value="<?php echo $user->name; ?>" disabled>
                                                     <p class="help-block text-danger"></p>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="idPetugas">Nama Petugas</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="idPetugas" class="font-weight-bold">Nama Petugas</label>
                                                     <input type="hidden" name="idPetugas" value="<?php echo $iuran->idPetugas; ?>">
                                                     <input class="form-control" value=<?php
                                                             $petugas_id = $iuran->idPetugas;
@@ -56,10 +54,9 @@
                                                             echo $petugas->name;
                                                             ?> disabled>
                                                     </input>
-                                                    <p class="help-block text-danger"></p>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="tanggal">Tanggal</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="tanggal" class="font-weight-bold">Tanggal</label>
                                                     <div class="input-group date" data-provide="datepicker">
                                                         <input type="hidden" name="tanggal" value="<?php echo $iuran->tanggal; ?>">
                                                         <input type="date" class="form-control" name="tanggal" value=<?php
@@ -73,26 +70,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="jenisBayar">Jenis Bayar</label>
+                                                <div class="control-group mb-3">
+                                                    <label for="jenisBayar" class="font-weight-bold">Jenis Bayar</label>
                                                     <select class="form-control" name="jenisBayar">
-                                                        <option selected value="1">Tunai</option>
-                                                        <option value="2">Non Tunai</option>   
-                                                   </select>
-                                                    <p class="help-block text-danger"></p>
-                                                </div>
-                                                <div class="control-group" id="nominalInput" style="display: none;">
-                                                    <label for="nominal">Nominal</label>
-                                                    <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Masukkan Nominal">
-                                                    <p class="help-block text-danger"></p>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label for="status">Status</label>
-                                                    <select class="form-control" name="status">
-                                                        <option selected value="1">Sudah Bayar</option>
-                                                        <option value="2">Belum Bayar</option>
+                                                        <option disabled selected>Pilih jenis bayar</option>
+                                                        <option value="1" <?= ($iuran->jenisBayar == 'Tunai') ? 'selected' : '' ?>>Tunai</option>
+                                                        <option value="2" <?= ($iuran->jenisBayar == 'Non Tunai') ? 'selected' : '' ?>>Non Tunai</option>
                                                     </select>
-                                                    <p class="help-block text-danger"></p>
+                                                </div>
+                                                <div class="control-group mb-3" id="nominalInput" <?php echo ($iuran->jenisBayar == 'Non Tunai') ? '' : 'style="display: none;"'; ?>>
+                                                    <label for="nominal" class="font-weight-bold">Nominal</label>
+                                                    <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Masukkan Nominal">
+                                                </div>
+
+                                                <div class="control-group mb-3">
+                                                    <label for="status" class="font-weight-bold">Status</label>
+                                                    <select class="form-control" name="status">
+                                                        <option disabled selected>Pilih status bayar</option>
+                                                        <option value="1" <?= ($iuran->status == 'Sudah Bayar') ? 'selected' : '' ?>>Sudah Bayar</option>
+                                                        <option value="2" <?= ($iuran->status == 'Belum Bayar') ? 'selected' : '' ?>>Belum Bayar</option>
+                                                    </select>
                                                 </div>
 
                                                 <button class="btn btn-primary py-2 px-4" type="submit" id="sendMesrsageButton">Simpan</button>
@@ -103,15 +100,6 @@
                             </div>
 
                             <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
