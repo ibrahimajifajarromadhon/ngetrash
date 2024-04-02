@@ -57,7 +57,7 @@
                                                         <?php $no = 1;
                                                         foreach ($daur as $d) { ?>
                                                     <tr>
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
                                                                 $user_id = $d->idUser;
@@ -74,7 +74,7 @@
                                                             ?>
                                                         </td>
                                                         <td><?php echo $d->berat; ?>kg</td>
-                                                        <td>Rp.<?php echo $d->total; ?></td>
+                                                        <td>Rp. <?php echo number_format($d->total); ?></td>
                                                         <td>
                                                             <?php 
                                                                 $petugas_id = $d->idPetugas;

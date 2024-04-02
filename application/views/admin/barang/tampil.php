@@ -53,9 +53,9 @@
                                                         <?php $no = 1;
                                                         foreach ($barang as $b) { ?>
                                                     <tr>
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td><?php echo $b->namaBarang; ?></td>
-                                                        <td>Rp. <?php echo $b->harga; ?></td>
+                                                        <td>Rp. <?php echo number_format($b->harga); ?></td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="<?php echo site_url('admin_barang/get_by_id/' . $b->idBarang); ?>" class="btn btn-warning">Ubah Barang</a>

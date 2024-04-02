@@ -124,4 +124,6 @@ $route['user/register'] = 'User/register';
 
 $route['user'] = 'User';
 $route['user/status'] = 'UserStatus';
+$route['user/status/page/(:num)'] = 'UserStatus/index/$1';
 $route['user/riwayat'] = 'UserRiwayat';
+$route['user/riwayat/page/(:num)'] = 'UserRiwayat/index/$1';

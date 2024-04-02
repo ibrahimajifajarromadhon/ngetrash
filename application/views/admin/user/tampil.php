@@ -70,13 +70,13 @@
                                                         foreach ($user as $usr) { ?>
                                                     <tr>
 
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td><?php echo $usr->name; ?></td>
                                                         <td><?php echo $usr->userName; ?></td>
                                                         <td><?php echo $usr->alamat; ?></td>
-                                                        <td><?php echo $usr->saldoMasuk; ?></td>
-                                                        <td><?php echo $usr->saldoKeluar; ?></td>
-                                                        <td><?php echo $usr->totalSaldo; ?></td>
+                                                        <td>Rp. <?php echo number_format($usr->saldoMasuk); ?></td>
+                                                        <td>Rp. <?php echo number_format($usr->saldoKeluar); ?></td>
+                                                        <td>Rp. <?php echo number_format($usr->totalSaldo); ?></td>
                                                         <td>
                                                             <b style="background-color: <?php echo ($usr->statusAktif == 'Y') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block; <?php if ($usr->statusAktif != 'Y') ?>">
                                                                 <?php if ($usr->statusAktif == "Y") {

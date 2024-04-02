@@ -13,7 +13,25 @@ class UserStatus extends CI_Controller{
             redirect('user/login');
         }
         $data['user'] = $this->Madmin->get_by_id('tbl_user', array('idUser' => $this->session->userdata('idUser')))->row();
-        $data['status']=$this->Madmin->get_all_data('tbl_status_pengambilan')->result();
+
+        $config['base_url'] = base_url('user/riwayat/page');
+        $config['total_rows'] = $this->Madmin->count_all_data('tbl_status_pengambilan');
+        $config['per_page'] = 5;
+        $config['uri_segment'] = 4;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+        $offset = ($page > 0) ? ($page - 1) * $config['per_page'] : 0;
+        $data['status'] = $this->Madmin->get_data_paginated('tbl_status_pengambilan', $config['per_page'], $offset)->result();
+
+        $data['links']['pagination'] = $this->pagination->create_links();
+        $data['links']['prev_page'] = ($page > 1) ? $page - 1 : 1;
+        $data['links']['next_page'] = ($page < ceil($config['total_rows'] / $config['per_page'])) ? $page + 1 : 1;
+        $data['links']['current_page'] = $page;
+        $data['links']['num_pages'] = ceil($config['total_rows'] / $config['per_page']);
+
         $this->load->view('user/layout/header', $data);
         $this->load->view('user/status/tampil', $data);
         $this->load->view('user/layout/footer');

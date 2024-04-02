@@ -55,7 +55,7 @@
                                                         <?php $no = 1;
                                                         foreach ($status as $i) { ?>
                                                     <tr>
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
                                                             $user_id = $i->idUser;

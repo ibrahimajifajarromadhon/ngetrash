@@ -65,7 +65,7 @@
                                                         <?php $no = 1;
                                                         foreach ($petugas as $p) { ?>
                                                     <tr>
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td><?php echo $p->name; ?></td>
                                                         <td><?php echo $p->userName; ?></td>
                                                         <td>
