@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Tambah Daur Ulang</h3>
+                                    <h3 class="card-title">Form Edit Daur Ulang</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row px-xl-3 pt-3">

@@ -65,7 +65,7 @@
                                                             ?> disabled>
                                                         </input>
                                                         <div class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-th"></span>
+                                                            <span class="fas fa-th"></span>
                                                         </div>
                                                     </div>
                                                 </div>

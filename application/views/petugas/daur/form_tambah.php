@@ -83,7 +83,7 @@
                                                         ?>
                                                         <input type="date" class="form-control" name="tanggal" value="<?= $tanggal_value ?>">
                                                         <div class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-th"></span>
+                                                            <span class="fas fa-th"></span>
                                                         </div>
                                                     </div>
                                                 </div>

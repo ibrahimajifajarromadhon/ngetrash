@@ -61,62 +61,64 @@ class PetugasDaur extends CI_Controller
     {
         if (empty($this->session->userdata('Petugas'))) {
             redirect('petugasdaur');
+        } else {
+            $this->form_validation->set_rules('idUser', 'Nama User', 'required');
+            $this->form_validation->set_rules('idPetugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+            $this->form_validation->set_rules('idBarang', 'Nama Barang', 'required');
+            $this->form_validation->set_rules('berat', 'Berat', 'required');
+            $this->form_validation->set_rules('totalResult', 'Total', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $error_idUser = form_error('idUser');
+                $error_idPetugas = form_error('idPetugas');
+                $error_tanggal = form_error('tanggal');
+                $error_idBarang = form_error('idBarang');
+                $error_berat = form_error('berat');
+                $error_totalResult = form_error('totalResult');
+
+                $input_idUser = $this->input->post('idUser');
+                $input_idPetugas = $this->input->post('idPetugas');
+                $input_tanggal = $this->input->post('tanggal');
+                $input_idBarang = $this->input->post('idBarang');
+                $input_berat = $this->input->post('berat');
+
+                $this->session->set_flashdata('error_idUser', $error_idUser);
+                $this->session->set_flashdata('error_idPetugas', $error_idPetugas);
+                $this->session->set_flashdata('error_tanggal', $error_tanggal);
+                $this->session->set_flashdata('error_idBarang', $error_idBarang);
+                $this->session->set_flashdata('error_berat', $error_berat);
+                $this->session->set_flashdata('error_totalResult', $error_totalResult);
+
+                $this->session->set_flashdata('input_idUser', $input_idUser);
+                $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
+                $this->session->set_flashdata('input_tanggal', $input_tanggal);
+                $this->session->set_flashdata('input_idBarang', $input_idBarang);
+                $this->session->set_flashdata('input_berat', $input_berat);
+
+                redirect('petugas_daur/add');
+            } else {
+
+                $id_u = $this->input->post('idUser');
+                $id_p = $this->input->post('idPetugas');
+                $tanggal = $this->input->post('tanggal');
+                $jenisbarang = $this->input->post('idBarang');
+                $berat = $this->input->post('berat');
+                $total = $this->input->post('totalResult');
+                $dataInput = array(
+                    'idUser' => $id_u,
+                    'idPetugas' => $id_p,
+                    'tanggal' => $tanggal,
+                    'idBarang' => $jenisbarang,
+                    'berat' => $berat,
+                    'total' => $total
+                );
+                $this->Madmin->insert('tbl_daur_ulang', $dataInput);
+                $this->Madmin->tambahSaldoMasuk($id_u, $total);
+                $this->session->set_flashdata('success', 'Berhasil tambah data daur ulang!');
+                redirect('petugas_daur');
+            }
         }
-        $this->form_validation->set_rules('idUser', 'Nama User', 'required');
-        $this->form_validation->set_rules('idPetugas', 'Nama Petugas', 'required');
-        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-        $this->form_validation->set_rules('idBarang', 'Nama Barang', 'required');
-        $this->form_validation->set_rules('berat', 'Berat', 'required');
-        $this->form_validation->set_rules('totalResult', 'Total', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $error_idUser = form_error('idUser');
-            $error_idPetugas = form_error('idPetugas');
-            $error_tanggal = form_error('tanggal');
-            $error_idBarang = form_error('idBarang');
-            $error_berat = form_error('berat');
-            $error_totalResult = form_error('totalResult');
-
-            $input_idUser = $this->input->post('idUser');
-            $input_idPetugas = $this->input->post('idPetugas');
-            $input_tanggal = $this->input->post('tanggal');
-            $input_idBarang = $this->input->post('idBarang');
-            $input_berat = $this->input->post('berat');
-
-            $this->session->set_flashdata('error_idUser', $error_idUser);
-            $this->session->set_flashdata('error_idPetugas', $error_idPetugas);
-            $this->session->set_flashdata('error_tanggal', $error_tanggal);
-            $this->session->set_flashdata('error_idBarang', $error_idBarang);
-            $this->session->set_flashdata('error_berat', $error_berat);
-            $this->session->set_flashdata('error_totalResult', $error_totalResult);
-
-            $this->session->set_flashdata('input_idUser', $input_idUser);
-            $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
-            $this->session->set_flashdata('input_tanggal', $input_tanggal);
-            $this->session->set_flashdata('input_idBarang', $input_idBarang);
-            $this->session->set_flashdata('input_berat', $input_berat);
-
-            redirect('petugas_daur/add');
-        }
-
-        $id_u = $this->input->post('idUser');
-        $id_p = $this->input->post('idPetugas');
-        $tanggal = $this->input->post('tanggal');
-        $jenisbarang = $this->input->post('idBarang');
-        $berat = $this->input->post('berat');
-        $total = $this->input->post('totalResult');
-        $dataInput = array(
-            'idUser' => $id_u,
-            'idPetugas' => $id_p,
-            'tanggal' => $tanggal,
-            'idBarang' => $jenisbarang,
-            'berat' => $berat,
-            'total' => $total
-        );
-        $this->Madmin->insert('tbl_daur_ulang', $dataInput);
-        $this->Madmin->tambahSaldoMasuk($id_u, $total);
-        $this->session->set_flashdata('success','Berhasil tambah data daur ulang!'); 
-        redirect('petugas_daur');
     }
 
     public function get_by_id($id)
@@ -129,7 +131,7 @@ class PetugasDaur extends CI_Controller
         $data['daur'] = $this->Madmin->get_by_id('tbl_daur_ulang', $dataWhere)->row_object();
         $data['barang'] = $this->Madmin->get_all_data('tbl_barang')->result();
         $data['harga'] = $this->Madmin->get_all_data('tbl_barang')->result();
-        
+
         $this->load->view('petugas/layout/header', $data);
         $this->load->view('petugas/layout/menu', $data);
         $this->load->view('petugas/daur/form_edit', $data);
@@ -150,7 +152,7 @@ class PetugasDaur extends CI_Controller
         $total = $this->input->post('totalResult');
 
         if ($total == "") {
-            $total_daur_ulang = $this->Madmin->getTotalDaurUlang($id); 
+            $total_daur_ulang = $this->Madmin->getTotalDaurUlang($id);
             $total = $total_daur_ulang;
         }
 
@@ -164,7 +166,7 @@ class PetugasDaur extends CI_Controller
         );
         $this->Madmin->update('tbl_daur_ulang', $dataUpdate, 'idDaur', $id);
         $this->Madmin->tambahSaldoMasuk($id_u, $total);
-        $this->session->set_flashdata('success','Berhasil ubah data daur ulang!'); 
+        $this->session->set_flashdata('success', 'Berhasil ubah data daur ulang!');
         redirect('petugas_daur');
     }
 

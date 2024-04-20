@@ -59,84 +59,90 @@ class PetugasIuran extends CI_Controller
     {
         if (empty($this->session->userdata('Petugas'))) {
             redirect('petugas_iuran');
+        } else {
+            $this->form_validation->set_rules('idUser', 'Nama User', 'required');
+            $this->form_validation->set_rules('idPetugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+            $this->form_validation->set_rules('jenisBayar', 'Jenis Bayar', 'required');
+            $this->form_validation->set_rules('status', 'Status', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $error_idUser = form_error('idUser');
+                $error_idPetugas = form_error('idPetugas');
+                $error_tanggal = form_error('tanggal');
+                $error_jenisBayar = form_error('jenisBayar');
+                $error_status = form_error('status');
+
+                $input_idUser = $this->input->post('idUser');
+                $input_idPetugas = $this->input->post('idPetugas');
+                $input_tanggal = $this->input->post('tanggal');
+                $input_jenisBayar = $this->input->post('jenisBayar');
+                $input_status = $this->input->post('status');
+
+                $this->session->set_flashdata('error_idUser', $error_idUser);
+                $this->session->set_flashdata('error_idPetugas', $error_idPetugas);
+                $this->session->set_flashdata('error_tanggal', $error_tanggal);
+                $this->session->set_flashdata('error_jenisBayar', $error_jenisBayar);
+                $this->session->set_flashdata('error_status', $error_status);
+
+                $this->session->set_flashdata('input_idUser', $input_idUser);
+                $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
+                $this->session->set_flashdata('input_tanggal', $input_tanggal);
+                $this->session->set_flashdata('input_jenisBayar', $input_jenisBayar);
+                $this->session->set_flashdata('input_status', $input_status);
+                redirect('petugas_iuran/add');
+            } else {
+
+                $id_u = $this->input->post('idUser');
+                $id_p = $this->input->post('idPetugas');
+                $tanggal = $this->input->post('tanggal');
+                $jenisbayar = $this->input->post('jenisBayar');
+                $status = $this->input->post('status');
+
+                $nominal = $this->input->post('nominal');
+
+                $saldo_user = $this->Madmin->getSaldoUser($id_u);
+
+                if ($nominal > $saldo_user) {
+                    $input_idUser = $this->input->post('idUser');
+                    $input_idPetugas = $this->input->post('idPetugas');
+                    $input_tanggal = $this->input->post('tanggal');
+                    $input_jenisBayar = $this->input->post('jenisBayar');
+                    $input_status = $this->input->post('status');
+
+                    $this->session->set_flashdata('input_idUser', $input_idUser);
+                    $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
+                    $this->session->set_flashdata('input_tanggal', $input_tanggal);
+                    $this->session->set_flashdata('input_jenisBayar', $input_jenisBayar);
+                    $this->session->set_flashdata('input_status', $input_status);
+
+                    $this->session->set_flashdata('error_nominal', 'Nominal melebihi saldo yang dimiliki!');
+
+                    redirect('petugas_iuran/add');
+                } else {
+
+                    $dataInput = array(
+                        'idUser' => $id_u,
+                        'idPetugas' => $id_p,
+                        'tanggal' => $tanggal,
+                        'jenisBayar' => $jenisbayar,
+                        'status' => $status
+                    );
+
+                    $this->Madmin->insert('tbl_iuran_wajib', $dataInput);
+                    if ($jenisbayar == '2') {
+                        $this->Madmin->kurangiSaldoKeluar($id_u, $nominal);
+                        $this->session->set_flashdata('success', 'Berhasil tambah data iuran wajib!');
+                        redirect('petugas_iuran');
+                    } else {
+                        $this->session->set_flashdata('success', 'Berhasil tambah data iuran wajib!');
+                        redirect('petugas_iuran');
+                    }
+                }
+            }
         }
-        $this->form_validation->set_rules('idUser', 'Nama User', 'required');
-        $this->form_validation->set_rules('idPetugas', 'Nama Petugas', 'required');
-        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-        $this->form_validation->set_rules('jenisBayar', 'Jenis Bayar', 'required');
-        $this->form_validation->set_rules('status', 'Status', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $error_idUser = form_error('idUser');
-            $error_idPetugas = form_error('idPetugas');
-            $error_tanggal = form_error('tanggal');
-            $error_jenisBayar = form_error('jenisBayar');
-            $error_status = form_error('status');
-
-            $input_idUser = $this->input->post('idUser');
-            $input_idPetugas = $this->input->post('idPetugas');
-            $input_tanggal = $this->input->post('tanggal');
-            $input_jenisBayar = $this->input->post('jenisBayar');
-            $input_status = $this->input->post('status');
-
-            $this->session->set_flashdata('error_idUser', $error_idUser);
-            $this->session->set_flashdata('error_idPetugas', $error_idPetugas);
-            $this->session->set_flashdata('error_tanggal', $error_tanggal);
-            $this->session->set_flashdata('error_jenisBayar', $error_jenisBayar);
-            $this->session->set_flashdata('error_status', $error_status);
-
-            $this->session->set_flashdata('input_idUser', $input_idUser);
-            $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
-            $this->session->set_flashdata('input_tanggal', $input_tanggal);
-            $this->session->set_flashdata('input_jenisBayar', $input_jenisBayar);
-            $this->session->set_flashdata('input_status', $input_status);
-            redirect('petugas_iuran/add');
-        }
-
-        $id_u = $this->input->post('idUser');
-        $id_p = $this->input->post('idPetugas');
-        $tanggal = $this->input->post('tanggal');
-        $jenisbayar = $this->input->post('jenisBayar');
-        $status = $this->input->post('status');
-
-        $nominal = $this->input->post('nominal');
-
-        $saldo_user = $this->Madmin->getSaldoUser($id_u);
-
-        if ($nominal > $saldo_user) {
-            $input_idUser = $this->input->post('idUser');
-            $input_idPetugas = $this->input->post('idPetugas');
-            $input_tanggal = $this->input->post('tanggal');
-            $input_jenisBayar = $this->input->post('jenisBayar');
-            $input_status = $this->input->post('status');
-
-            $this->session->set_flashdata('input_idUser', $input_idUser);
-            $this->session->set_flashdata('input_idPetugas', $input_idPetugas);
-            $this->session->set_flashdata('input_tanggal', $input_tanggal);
-            $this->session->set_flashdata('input_jenisBayar', $input_jenisBayar);
-            $this->session->set_flashdata('input_status', $input_status);
-
-            $this->session->set_flashdata('error_nominal', 'Nominal melebihi saldo yang dimiliki!');
-            
-            redirect('petugas_iuran/add');
-        }
-
-        $dataInput = array(
-            'idUser' => $id_u,
-            'idPetugas' => $id_p,
-            'tanggal' => $tanggal,
-            'jenisBayar' => $jenisbayar,
-            'status' => $status
-        );
-
-        $this->Madmin->insert('tbl_iuran_wajib', $dataInput);
-        if ($jenisbayar == '2') {
-            $this->Madmin->kurangiSaldoKeluar($id_u, $nominal);
-        }
-        $this->session->set_flashdata('success', 'Berhasil tambah data iuran wajib!');
-        redirect('petugas_iuran');
     }
-    
+
     public function get_by_id($id)
     {
         if (empty($this->session->userdata('Petugas'))) {
