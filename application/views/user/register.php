@@ -37,7 +37,6 @@
             margin-bottom: 10px
         }
 
-
         a:hover {
             text-decoration: none
         }

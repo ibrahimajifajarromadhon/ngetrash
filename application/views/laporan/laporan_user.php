@@ -50,7 +50,7 @@
                                                 <th>Saldo Masuk</th>
                                                 <th>Saldo Keluar</th>
                                                 <th>Total Saldo</th>
-                                                <th>Status Aktif</th>
+                                                <th>Status Akun</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,7 +58,7 @@
                                                 <?php $no = 1;
                                                 foreach ($user as $usr) { ?>
                                             <tr>
-                                                <th><?php echo $no; ?></th>
+                                                <th style="text-align: center;"><?php echo $no; ?></th>
                                                 <td><?php echo $usr->name; ?></td>
                                                 <td><?php echo $usr->userName; ?></td>
                                                 <td><?php echo $usr->alamat; ?></td>

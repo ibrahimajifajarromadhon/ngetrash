@@ -65,7 +65,13 @@
                         $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
                         echo $user->name;
                         ?></td>
-                    <td><?php echo $s->tanggal; ?></td>
+                    <td><?php
+                        $date = new DateTime($s->tanggal);
+                        $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                        echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                        ?></td>
                     <td><b><?php echo $s->keterangan; ?></b></td>
                     <td>
                         <?php

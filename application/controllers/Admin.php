@@ -126,6 +126,9 @@ class Admin extends CI_Controller{
 	}
 
 	public function laporan_petugas(){
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
 		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
 
 		$config['base_url'] = base_url('admin_print/laporan_petugas/page');
@@ -160,6 +163,9 @@ class Admin extends CI_Controller{
 	}
 
 	public function laporan_user(){
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
 		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
 
 		$config['base_url'] = base_url('admin_print/laporan_user/page');
@@ -193,6 +199,9 @@ class Admin extends CI_Controller{
 		$this->load->view('print/user', $data);
 	}
 	public function laporan_iuran(){
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
 		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
 
 		$config['base_url'] = base_url('admin_print/laporan_iuran/page');
@@ -227,6 +236,9 @@ class Admin extends CI_Controller{
 	}
 
 	public function laporan_status(){
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
 		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
 
 		$config['base_url'] = base_url('admin_print/laporan_status/page');
@@ -261,6 +273,9 @@ class Admin extends CI_Controller{
 	}
 
 	public function laporan_daur(){
+		if(empty($this->session->userdata('Admin'))) {
+			redirect('admin/login');
+		}
 		$data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
 
 		$config['base_url'] = base_url('admin_print/laporan_daur/page');

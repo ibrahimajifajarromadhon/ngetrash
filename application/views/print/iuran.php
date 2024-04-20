@@ -52,7 +52,7 @@
             <th>Nama User</th>
             <th>Tanggal</th>
             <th>Jenis Bayar</th>
-            <th>Status</th>
+            <th>Status Bayar</th>
             <th>Nama Petugas</th>
         </tr>
         <tbody>
@@ -68,7 +68,13 @@
                     echo $user->name;
                     ?>
                 </td>
-                <td><?php echo $i->tanggal; ?></td>
+                <td><?php
+                    $date = new DateTime($i->tanggal);
+                    $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                    $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                    echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                    ?></td>
                 <td><b><?php echo $i->jenisBayar; ?></b></td>
                 <td><b><?php echo $i->status; ?></b></td>
                 <td>

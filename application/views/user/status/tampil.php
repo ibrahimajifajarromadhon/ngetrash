@@ -46,8 +46,13 @@
                                                             <tr>
                                                                 <th style="text-align: center;"><?php echo $no; ?></th>
                                                                 <td><?php echo $loggedInUser->name; ?></td>
-                                                                <td><?php echo $s->tanggal; ?></td>
-                                                                <td><b style="background-color: <?php echo ($s->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $s->keterangan; ?></b></td>
+                                                                <td><?php
+                                                                    $date = new DateTime($s->tanggal);
+                                                                    $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                                    $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                                    echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                                    ?></td>                                                                <td><b style="background-color: <?php echo ($s->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $s->keterangan; ?></b></td>
                                                                 <td>
                                                                     <?php
                                                                     $petugas_id = $s->idPetugas;

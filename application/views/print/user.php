@@ -55,7 +55,7 @@
             <th>Saldo Masuk</th>
             <th>Saldo Keluar</th>
             <th>Total Saldo</th>
-            <th>Status Aktif</th>
+            <th>Status Akun</th>
         </tr>
         <tbody>
             <tr>

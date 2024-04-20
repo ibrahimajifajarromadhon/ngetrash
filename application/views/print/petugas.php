@@ -51,7 +51,7 @@
             <th class="center" id="no">#</th>
             <th>Nama Petugas</th>
             <th>Username</th>
-            <th>Status Aktif</th>
+            <th>Status Akun</th>
         </tr>
         <?php
         $no = 1;

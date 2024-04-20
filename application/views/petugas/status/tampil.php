@@ -35,7 +35,7 @@
                                             </div>
                                         <?php endif; ?>
                                         <div class="pl-2 pt-2">
-                                        <a href="<?php echo site_url('petugas_status/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Status </b></a>
+                                            <a href="<?php echo site_url('petugas_status/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Status </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -51,31 +51,37 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
+                                                    <tr>
                                                         <?php $no = 1;
-                                                        foreach ($status as $i) { ?>
+                                                        foreach ($status as $s) { ?>
                                                     <tr>
                                                         <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
-                                                            $user_id = $i->idUser;
+                                                            $user_id = $s->idUser;
                                                             $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
                                                             echo $user->name;
                                                             ?>
                                                         </td>
-                                                        <td><?php echo $i->tanggal; ?></td>
-                                                        <td><b style="background-color: <?php echo ($i->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $i->keterangan; ?></b></td>
+                                                        <td><?php
+                                                            $date = new DateTime($s->tanggal);
+                                                            $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                            echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                            ?></td>
+                                                        <td><b style="background-color: <?php echo ($s->keterangan == 'Sudah Diambil') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $s->keterangan; ?></b></td>
                                                         <td>
                                                             <?php
-                                                            $petugas_id = $i->idPetugas;
+                                                            $petugas_id = $s->idPetugas;
                                                             $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
                                                             echo $petugas->name;
                                                             ?>
                                                         </td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="<?php echo site_url('petugas_status/get_by_id/' . $i->idStatus); ?>" class="btn btn-warning">Ubah Status</a>
-                                                                <a href="<?php echo site_url('petugas_status/delete/' . $i->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
+                                                                <a href="<?php echo site_url('petugas_status/get_by_id/' . $s->idStatus); ?>" class="btn btn-warning">Ubah Status</a>
+                                                                <a href="<?php echo site_url('petugas_status/delete/' . $s->idStatus); ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini')" class="btn btn-danger">Hapus</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -84,7 +90,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <!-- /.card-body -->
                                         <div class="card-footer clearfix">
                                             <ul class="pagination pagination-sm m-0 justify-content-end">

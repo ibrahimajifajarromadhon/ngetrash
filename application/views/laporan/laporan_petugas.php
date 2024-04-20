@@ -46,7 +46,7 @@
                                                 <th style="width: 10px">No.</th>
                                                 <th>Nama Petugas</th>
                                                 <th>Username</th>
-                                                <th>Status Aktif</th>
+                                                <th>Status Akun</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -54,7 +54,7 @@
                                                 <?php $no = 1;
                                                 foreach ($petugas as $p) { ?>
                                             <tr>
-                                                <th><?php echo $no ?></th>
+                                                <th style="text-align: center;"><?php echo $no ?></th>
                                                 <td><?php echo $p->name ?></td>
                                                 <td><?php echo $p->userName ?></td>
                                                 <td><b><?php if ($p->statusAktif == "Y") {

@@ -35,7 +35,7 @@
                                             </div>
                                         <?php endif; ?>
                                         <div class="pl-2 pt-2">
-                                        <a href="<?php echo site_url('petugas_daur/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Daur Ulang </b></a>
+                                            <a href="<?php echo site_url('petugas_daur/add'); ?>" class="btn btn-sm btn-info float-left p-2"><b> Tambah Data Daur Ulang </b></a>
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="table-responsive p-2">
@@ -60,26 +60,32 @@
                                                         <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
-                                                                $user_id = $d->idUser;
-                                                                $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
-                                                                echo $user->name;
-                                                            ?>    
+                                                            $user_id = $d->idUser;
+                                                            $user = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
+                                                            echo $user->name;
+                                                            ?>
                                                         </td>
-                                                        <td><?php echo $d->tanggal; ?></td>
+                                                        <td><?php
+                                                            $date = new DateTime($d->tanggal);
+                                                            $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                            echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                            ?></td>
                                                         <td>
                                                             <?php
-                                                                $barang_id = $d->idBarang;
-                                                                $barang = $this->db->get_where('tbl_barang', array('idBarang' => $barang_id))->row();
-                                                                echo $barang->namaBarang;
+                                                            $barang_id = $d->idBarang;
+                                                            $barang = $this->db->get_where('tbl_barang', array('idBarang' => $barang_id))->row();
+                                                            echo $barang->namaBarang;
                                                             ?>
                                                         </td>
                                                         <td><?php echo $d->berat; ?>kg</td>
                                                         <td>Rp. <?php echo number_format($d->total); ?></td>
                                                         <td>
-                                                            <?php 
-                                                                $petugas_id = $d->idPetugas;
-                                                                $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
-                                                                echo $petugas->name;
+                                                            <?php
+                                                            $petugas_id = $d->idPetugas;
+                                                            $petugas = $this->db->get_where('tbl_petugas', array('idPetugas' => $petugas_id))->row();
+                                                            echo $petugas->name;
                                                             ?>
                                                         </td>
                                                         <td>
@@ -94,7 +100,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <!-- /.card-body -->
                                         <div class="card-footer clearfix">
                                             <ul class="pagination pagination-sm m-0 justify-content-end">

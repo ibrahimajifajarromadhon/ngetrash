@@ -47,7 +47,7 @@
                                                         <th>Nama User</th>
                                                         <th>Tanggal</th>
                                                         <th>Jenis Bayar</th>
-                                                        <th>Status</th>
+                                                        <th>Status Bayar</th>
                                                         <th>Nama Petugas</th>
                                                     </tr>
                                                 </thead>
@@ -56,7 +56,7 @@
                                                         <?php $no = 1;
                                                         foreach ($iuran as $i) { ?>
                                                     <tr>
-                                                        <th><?php echo $no; ?></th>
+                                                        <th style="text-align: center;"><?php echo $no; ?></th>
                                                         <td>
                                                             <?php
                                                             $user_id = $i->idUser;
@@ -64,7 +64,13 @@
                                                             echo $user->name;
                                                             ?>
                                                         </td>
-                                                        <td><?php echo $i->tanggal; ?></td>
+                                                        <td><?php
+                                                            $date = new DateTime($i->tanggal);
+                                                            $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                            echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                            ?></td>
                                                         <td><b><?php echo $i->jenisBayar; ?></b></td>
                                                         <td><b><?php echo $i->status; ?></b></td>
                                                         <td>

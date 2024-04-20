@@ -69,7 +69,13 @@
                     echo $user->name;
                     ?>
                 </td>
-                <td><?php echo $d->tanggal; ?></td>
+                <td><?php
+                    $date = new DateTime($d->tanggal);
+                    $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                    $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                    echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                    ?></td>
                 <td>
                     <?php
                     $barang_id = $d->idBarang;

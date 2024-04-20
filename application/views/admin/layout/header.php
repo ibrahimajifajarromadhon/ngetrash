@@ -35,6 +35,10 @@
     body {
       font-family: 'Poppins', sans-serif;
     }
+
+    .fa {
+      font-family: 'FontAwesome' !important;
+    }
   </style>
 </head>
 

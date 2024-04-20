@@ -64,7 +64,13 @@
                                                             echo $user->name;
                                                             ?>
                                                         </td>
-                                                        <td><?php echo $i->tanggal; ?></td>
+                                                        <td><?php
+                                                            $date = new DateTime($i->tanggal);
+                                                            $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                            echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                            ?></td>
                                                         <td><b style="background-color: <?php echo ($i->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $i->jenisBayar; ?></b></td>
                                                         <td><b style="background-color: <?php echo ($i->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $i->status; ?></b></td>
                                                         <td>

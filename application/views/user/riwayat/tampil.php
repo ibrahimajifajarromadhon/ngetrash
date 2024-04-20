@@ -42,14 +42,20 @@
                                                     $user_id = $_SESSION['idUser'];
                                                     $loggedInUser = $this->db->get_where('tbl_user', array('idUser' => $user_id))->row();
                                                     foreach ($riwayat as $r) {
-                                                        if ($r->idUser == $loggedInUser->idUser) { 
+                                                        if ($r->idUser == $loggedInUser->idUser) {
                                                     ?>
                                                             <tr>
                                                                 <th style="text-align: center;"><?php echo $no; ?></th>
                                                                 <td><?php echo $loggedInUser->name; ?></td>
-                                                                <td><?php echo $r->tanggal; ?></td>
-                                                                <td><b style="background-color: <?php echo ($r->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $r->status; ?></b></td>
-                                                                <td><b style="background-color: <?php echo ($r->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 7px; color: white; border-radius: 10px;"><?php echo $r->jenisBayar; ?></b></td>
+                                                                <td><?php
+                                                                    $date = new DateTime($r->tanggal);
+                                                                    $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                                                    $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+                                                                    echo $hari[$date->format('w')] . ', ' . $date->format('j') . ' ' . $bulan[$date->format('n') - 1] . ' ' . $date->format('Y');
+                                                                    ?></td>
+                                                                <td><b style="background-color: <?php echo ($r->status == 'Sudah Bayar') ? 'green' : 'red'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $r->status; ?></b></td>
+                                                                <td><b style="background-color: <?php echo ($r->jenisBayar == 'Tunai') ? 'blue' : 'orangered'; ?>; padding: 4px; color: white; border-radius: 10px; display: inline-block;"><?php echo $r->jenisBayar; ?></b></td>
                                                                 <td>
                                                                     <?php
                                                                     $petugas_id = $r->idPetugas;
