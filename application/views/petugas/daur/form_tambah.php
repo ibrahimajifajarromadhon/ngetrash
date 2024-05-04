@@ -151,7 +151,7 @@
 
         var harga = document.querySelector('select[name="idBarang"] option:checked').getAttribute('data-harga');
         
-        var total = berat * harga;
+        var total = harga * berat;
 
         document.getElementById('total').innerText = 'Rp. ' + total;
         document.getElementById('totalResult').value = total;
@@ -160,3 +160,4 @@
     document.getElementById('berat').addEventListener('input', hitungTotal);
     document.querySelector('select[name="idBarang"]').addEventListener('change', hitungTotal);
 </script>
+

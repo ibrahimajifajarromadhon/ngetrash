@@ -42,6 +42,13 @@
                                             </div>
                                         <?php endif; ?>
 
+                                        <?php if ($this->session->flashdata('fail')) : ?>
+                                            <div class="ml-2 mr-2 mt-2 mb-0 alert alert-danger alert-dismissible text-whitesmoke">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <strong><?php echo $this->session->flashdata('fail'); ?></strong>
+                                            </div>
+                                        <?php endif; ?>
+
                                         <?php if ($this->session->flashdata('success')) : ?>
                                             <div class="ml-2 mr-2 mt-2 mb-0 alert alert-success alert-dismissible text-whitesmoke">
                                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

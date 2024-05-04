@@ -6,12 +6,13 @@ class AdminUser extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('Madmin');
-    }
 
-    public function index(){
         if(empty($this->session->userdata('Admin'))) {
 			redirect('admin/login');
 		}
+    }
+
+    public function index(){
         $data['admin'] = $this->Madmin->get_by_id('tbl_admin', array('idAdmin' => $this->session->userdata('idAdmin')))->row();
     
         $config['base_url'] = base_url('admin_user/page');
@@ -39,9 +40,6 @@ class AdminUser extends CI_Controller{
     }
 
     public function ubah_status($id) {
-        if(empty($this->session->userdata('Admin'))) {
-			redirect('admin/login');
-		}
         $datawhere = array('idUser'=>$id);
         $result = $this->Madmin->get_by_id('tbl_user', $datawhere)->row_object();
         $status = $result->statusAktif;
@@ -49,18 +47,17 @@ class AdminUser extends CI_Controller{
         if($status=="Y") {
             $dataUpdate = array('statusAktif'=>"N");
             $this->session->set_flashdata('non_active','Berhasil ubah status, akun '.$nama.' sekarang tidak aktif!'); 
-        } else {
+        } else if($status=="N") {
             $dataUpdate = array('statusAktif'=>"Y");
             $this->session->set_flashdata('active','Berhasil ubah status, akun '.$nama.' sekarang aktif!'); 
+        } else {
+            $this->session->set_flashdata('fail', 'Gagal ubah status, akun '.$nama);
         }
-        $this->Madmin-> update('tbl_user', $dataUpdate, 'idUser', $id);
+        $this->Madmin->update('tbl_user', $dataUpdate, 'idUser', $id);
         redirect('admin_user');
         }
 
     public function delete($id) {
-        if(empty($this->session->userdata('Admin'))) {
-			redirect('admin/login');
-		}
         $this->Madmin->delete('tbl_user', 'idUser', $id);
         $this->session->set_flashdata('success','Berhasil hapus data akun!'); 
         redirect('admin_user');
