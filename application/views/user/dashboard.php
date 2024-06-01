@@ -183,3 +183,8 @@
       </div><!--- END ROW -->
     </div><!--- END CONTAINER -->
   </section>
+
+  <section id="map">
+  <h1 class="text-center">Peta Daerah Istimewa Yogyakarta</h1>
+  <div id="map"></div>
+  </section>

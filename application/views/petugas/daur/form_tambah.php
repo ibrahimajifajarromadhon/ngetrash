@@ -33,7 +33,7 @@
                                 <div class="row px-xl-3 pt-3">
                                     <div class="col-lg-7 mb-5">
                                         <div class="contact-form">
-                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugasdaur/save'); ?>" enctype="multipart/form-data">
+                                            <form name="sentMessage" method="post" action="<?php echo site_url('petugas_daur/save'); ?>" enctype="multipart/form-data">
                                                 <?php if ($this->session->flashdata('error_idUser')) : ?>
                                                     <div class="pb-0 pt-3 alert alert-danger alert-dismissible text-whitesmoke">
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

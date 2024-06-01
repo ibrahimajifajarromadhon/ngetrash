@@ -80,7 +80,7 @@
 
                                                 <?php for ($i = 1; $i <= $links['num_pages']; $i++) : ?>
                                                     <li class="page-item <?php echo ($i == $links['current_page']) ? 'active' : ''; ?>">
-                                                        <a class="page-link" href="<?php echo site_url('petugas_daur/page/' . $i); ?>"><?php echo $i; ?></a>
+                                                        <a class="page-link" href="<?php echo site_url('admin_barang/page/' . $i); ?>"><?php echo $i; ?></a>
                                                     </li>
                                                 <?php endfor; ?>
 
