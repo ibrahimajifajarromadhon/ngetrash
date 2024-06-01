@@ -184,7 +184,7 @@
     </div><!--- END CONTAINER -->
   </section>
 
-  <section id="map">
+  <section>
   <h1 class="text-center">Peta Daerah Istimewa Yogyakarta</h1>
   <div id="map"></div>
   </section>
